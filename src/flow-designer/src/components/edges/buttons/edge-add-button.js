@@ -40,7 +40,7 @@ const EdgeAddButton = (props) => {
             <ul style={{ margin: '4px 0px' }}>
               {NODE_TYPES.filter((x) => x.category === CATEGORY_TYPES.TASK).map((node, i) => {
                 return (
-                  <li className="node-type-list" key={i} onClick={(event) => data.onAddNodeCallback({ id, type: node.type, position: { x: labelX, y: labelY } })}>
+                  <li className="node-type-list" key={i} onClick={() => data.onAddNodeCallback({ id, type: node.type, position: { x: labelX, y: labelY } })}>
                     <label className="node-type-list-label">{node.type}</label>
                   </li>
                 );

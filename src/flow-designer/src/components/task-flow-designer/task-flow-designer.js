@@ -9,7 +9,6 @@ import './task-flow-designer.scss';
 import BlockTray from '../blocks-tray';
 import { CATEGORY_TYPES } from '../../constants';
 import BlockPropertiesTray from '../block-properties-tray/block-properties-tray';
-import { getLayoutedElements } from '../../utils/workflow-layout-utils';
 
 const TaskFlowDesigner = ({
   connectionLineStyle,
@@ -32,15 +31,6 @@ const TaskFlowDesigner = ({
   selectedTaskNode,
   setOpenTaskPropertiesBlock
 }) => {
-  const [layoutElements, setLayoutElements] = React.useState([]);
-
-  React.useEffect(() => {
-    setLayoutElements(getLayoutedElements(elements));
-  }, [elements]);
-
-  const layoutNodes = layoutElements.filter((x) => x.position);
-  const layoutEdges = layoutElements.filter((x) => !x.position);
-
   return (
     <div className="dnd-flow">
       <PanelGroup direction="horizontal">

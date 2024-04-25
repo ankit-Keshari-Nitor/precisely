@@ -2,7 +2,6 @@ import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
 import { NODE_TYPES } from '../constants';
 
-const position = { x: 0, y: 0 };
 const getNewTaskId = () => `Task_Name_${uuidv4()}`;
 
 const getUpdatedElementsAfterActionNodeAddition = ({ elements, newNodeId, targetNodeId, onAddNodeCallback }) => {
@@ -28,7 +27,7 @@ const testElements = (taskEdgesClone, elements) => {
     clonedTaskEdgesClone.forEach((entry1) => {
       let isNewEntry = true; // says if entry1 is not present in array2
       clonedElements.forEach((entry2) => {
-        if (entry1.id == entry2.id) {
+        if (entry1.id === entry2.id) {
           isNewEntry = false; // the entry1 was found in array2
         }
       });
@@ -43,7 +42,7 @@ const testElements = (taskEdgesClone, elements) => {
 
 const getUpdatedElementsAfterNodeAddition = ({ elements, targetEdgeId, type, position, onDoubleClick, onDeleteNodeCallback, onNodeClickCallback, onAddNodeCallback }) => {
   const newNodeId = getNewTaskId();
-  const nodeData = NODE_TYPES.filter((node) => node.type == type);
+  const nodeData = NODE_TYPES.filter((node) => node.type === type);
   const newNode = {
     id: newNodeId,
     type,
