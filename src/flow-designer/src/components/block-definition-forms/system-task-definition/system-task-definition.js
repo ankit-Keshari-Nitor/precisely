@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, TextArea, TextInput, Button, Modal, Tabs, TabList, Tab, TabPanels, TabPanel, Column, Grid } from '@carbon/react';
 import './system-task-definition.scss';
-import ExitValidation from '../exit-validation';
+import ExitValidationFrom from '../../exit-validation-form';
 
 export default function SystemTaskDefinitionForm({ selectedNode }) {
   const [open, setOpen] = useState(false);
@@ -38,7 +38,7 @@ export default function SystemTaskDefinitionForm({ selectedNode }) {
             </Form>
           </TabPanel>
           <TabPanel>
-            <ExitValidation />
+            <ExitValidationFrom />
           </TabPanel>
         </TabPanels>
       </Tabs>

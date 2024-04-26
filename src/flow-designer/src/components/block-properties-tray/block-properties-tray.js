@@ -2,8 +2,15 @@ import React from 'react';
 import './block-properties-tray.scss';
 import { NODE_TYPE } from '../../constants';
 import {
-  ApiTaskDefinitionForm, ApprovalTaskDefinitionForm, AttributeTaskDefinitionForm, CustomTaskDefinitionForm,
-  FormTaskDefinition, GatewayTaskDefinitionForm, PartnerTaskDefinitionForm, SponsorTaskDefinitionForm, SystemTaskDefinitionForm,
+  ApiTaskDefinitionForm,
+  ApprovalTaskDefinitionForm,
+  AttributeTaskDefinitionForm,
+  CustomTaskDefinitionForm,
+  FormTaskDefinition,
+  GatewayTaskDefinitionForm,
+  PartnerTaskDefinitionForm,
+  SponsorTaskDefinitionForm,
+  SystemTaskDefinitionForm,
   XsltTaskDefinitionForm
 } from '../block-definition-forms';
 import { CrossIcon } from './../../icons';

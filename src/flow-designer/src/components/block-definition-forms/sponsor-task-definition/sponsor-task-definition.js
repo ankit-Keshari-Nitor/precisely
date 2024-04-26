@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Tabs, TabList, Tab, TabPanels, TabPanel } from '@carbon/react';
 import './sponsor-task-definition.scss';
-import ExitValidation from '../../exit-validation/exit-validation';
+import ExitValidationFrom from '../../exit-validation-form/exit-validation-form';
 import SponsorDefineForm from './sponsor-define-form';
 
 export default function SponsorTaskDefinitionForm({ selectedNode }) {
@@ -20,7 +20,7 @@ export default function SponsorTaskDefinitionForm({ selectedNode }) {
           </TabPanel>
           {/* Exit Validation Form */}
           <TabPanel>
-            <ExitValidation />
+            <ExitValidationFrom />
           </TabPanel>
         </TabPanels>
       </Tabs>

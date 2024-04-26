@@ -1,8 +1,7 @@
 import React from 'react';
 import { Form, Select, SelectItem, TextArea, TextInput, Checkbox, Button, Tabs, TabList, Tab, TabPanels, TabPanel, Column, Grid } from '@carbon/react';
 import './xslt-task-definition.scss';
-import ExitValidation from '../exit-validation';
-
+import ExitValidationFrom from '../../exit-validation-form';
 
 export default function XsltTaskDefinitionForm({ selectedNode }) {
   return (
@@ -77,7 +76,7 @@ export default function XsltTaskDefinitionForm({ selectedNode }) {
           </TabPanel>
           {/* Exit Validation Form */}
           <TabPanel>
-            <ExitValidation />
+            <ExitValidationFrom />
           </TabPanel>
         </TabPanels>
       </Tabs>

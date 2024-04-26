@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Link, Select, SelectItem, TextArea, FileUploader, TextInput, Checkbox, Button, Tabs, TabList, Tab, TabPanels, TabPanel, Column, Grid } from '@carbon/react';
 import './api-task-definition.scss';
-import ExitValidation from '../../exit-validation';
+import ExitValidationFrom from '../../exit-validation-form';
 import { ElippsisIcon } from '../../../icons';
 import ApiDefineForm from './api-define-form';
 
@@ -105,7 +105,7 @@ export default function ApiTaskDefinitionForm({ selectedNode }) {
           </TabPanel>
           {/* Exit Validation Form */}
           <TabPanel>
-            <ExitValidation />
+            <ExitValidationFrom />
           </TabPanel>
         </TabPanels>
       </Tabs>

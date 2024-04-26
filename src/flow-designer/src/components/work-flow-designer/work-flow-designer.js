@@ -7,7 +7,7 @@ import './work-flow-designer.scss';
 
 import Designer from '../../../../page-designer/src';
 import componentMapper from '../../../../carbon-mappers/src';
-import { CustomEdge } from '../edges';
+import { CrossEdge } from '../edges';
 import DialogFlowDesigner from '../dialog-flow-designer';
 import TaskFlowDesigner from '../task-flow-designer';
 import { StartNode, EndNode, GatewayNode, TaskNode } from '../nodes';
@@ -52,7 +52,7 @@ const TASK_NODE_TYPES = {
 };
 
 const TASK_EDGE_TYPES = {
-  buttonedge: CustomEdge
+  buttonedge: CrossEdge
 };
 
 const DIALOG_INITIAL_NODES = [
@@ -82,7 +82,7 @@ const DIALOG_NODE_TYPES = {
 };
 
 const DIALOG_EDGE_TYPES = {
-  buttonedge: CustomEdge
+  buttonedge: CrossEdge
 };
 
 let dialogId = 0;
@@ -116,12 +116,15 @@ export default function WorkFlowDesigner() {
     setIsPageDesignerActive(true);
   };
 
-  const onDialogNodeConnect = useCallback((params) => {
-    let newParam = params;
-    newParam.type = 'buttonedge';
-    newParam.markerEnd = endMarks;
-    setDialogEdges((eds) => addEdge({ ...newParam, animated: true, style: { stroke: '#000' } }, eds));
-  }, [setDialogEdges]);
+  const onDialogNodeConnect = useCallback(
+    (params) => {
+      let newParam = params;
+      newParam.type = 'buttonedge';
+      newParam.markerEnd = endMarks;
+      setDialogEdges((eds) => addEdge({ ...newParam, animated: true, style: { stroke: '#000' } }, eds));
+    },
+    [setDialogEdges]
+  );
 
   const onDialogNodeDragOver = useCallback((event) => {
     event.preventDefault();

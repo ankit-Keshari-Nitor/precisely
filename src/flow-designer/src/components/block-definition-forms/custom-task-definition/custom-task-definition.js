@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Select, SelectItem, TextArea, TextInput, Button, Modal, Tabs, TabList, Tab, TabPanels, TabPanel, Column, Grid } from '@carbon/react';
+import { Form, TextArea, TextInput, Button, Modal, Tabs, TabList, Tab, TabPanels, TabPanel, Column, Grid } from '@carbon/react';
 
-import './partner-task-definition.scss';
-import ExitValidation from '../exit-validation/exit-validation';
+import './custom-task-definition.scss';
+import ExitValidationFrom from '../../exit-validation-form';
 
-export default function PartnerTaskDefinitionForm({ selectedNode }) {
+export default function CustomTaskDefinitionForm({ selectedNode }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="activity-form">
@@ -23,16 +23,6 @@ export default function PartnerTaskDefinitionForm({ selectedNode }) {
                 <Column className="col-margin" lg={16}>
                   <TextArea id="one" labelText="Description" />
                 </Column>
-                <Column className="col-margin" lg={16}>
-                  <TextInput id="one" labelText="Estimate (Days)*" />
-                </Column>
-                <Column className="col-margin" lg={16}>
-                  <Select id={`select-1`} labelText="Role">
-                    <SelectItem value="" text="" />
-                    <SelectItem value="option-1" text="Option 1" />
-                    <SelectItem value="option-2" text="Option 2" />
-                  </Select>
-                </Column>
               </Grid>
               <Grid className="buttons-wrapper-grid">
                 <Column lg={8}>
@@ -49,12 +39,12 @@ export default function PartnerTaskDefinitionForm({ selectedNode }) {
             </Form>
           </TabPanel>
           <TabPanel>
-            <ExitValidation />
+            <ExitValidationFrom />
           </TabPanel>
         </TabPanels>
       </Tabs>
       <Modal open={open} onRequestClose={() => setOpen(false)} isFullWidth modalHeading="Confirmation" primaryButtonText="Delete" secondaryButtonText="Cancel">
-        Do you want to delete Partner Task-01?
+        Do you want to delete Custom Task-01?
       </Modal>
     </div>
   );

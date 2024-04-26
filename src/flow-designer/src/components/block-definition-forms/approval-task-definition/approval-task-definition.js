@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Modal, Tabs, TabList, Tab, TabPanels, TabPanel, Column, Grid } from '@carbon/react';
+import { Modal, Tabs, TabList, Tab, TabPanels, TabPanel } from '@carbon/react';
 import './approval-task-definition.scss';
-import ExitValidation from '../../exit-validation';
+import ExitValidationFrom from '../../exit-validation-form';
 import ApprovalDefineForm from './approval-define-form';
 
 export default function ApprovalTaskDefinitionForm({ selectedNode }) {
@@ -20,7 +20,7 @@ export default function ApprovalTaskDefinitionForm({ selectedNode }) {
           </TabPanel>
           {/* Exit Validation Form */}
           <TabPanel>
-            <ExitValidation />
+            <ExitValidationFrom />
           </TabPanel>
         </TabPanels>
       </Tabs>

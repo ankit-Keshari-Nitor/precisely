@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Tabs, TabList, Tab, TabPanels, TabPanel } from '@carbon/react';
 
 import './attribute-task-definition.scss';
-import ExitValidation from '../../exit-validation';
+import ExitValidationFrom from '../../exit-validation-form';
 import AttributeDefineForm from './attribute-define-form';
 
 export default function AttributeTaskDefinitionForm({ selectedNode }) {
@@ -21,7 +21,7 @@ export default function AttributeTaskDefinitionForm({ selectedNode }) {
           </TabPanel>
           {/* Exit Validation Form */}
           <TabPanel>
-            <ExitValidation />
+            <ExitValidationFrom />
           </TabPanel>
         </TabPanels>
       </Tabs>
