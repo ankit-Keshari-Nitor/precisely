@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Form, Select, SelectItem, TextArea, TextInput, Button, Modal, Tabs, TabList, Tab, TabPanels, TabPanel, Column, Grid } from '@carbon/react';
+import { Modal, Tabs, TabList, Tab, TabPanels, TabPanel } from '@carbon/react';
 
 import './partner-task-definition.scss';
 import ExitValidationFrom from '../../exit-validation-form/exit-validation-form';
+import PartnerDefineForm from './partner-define-form';
 
 export default function PartnerTaskDefinitionForm({ selectedNode }) {
   const [open, setOpen] = useState(false);
@@ -14,40 +15,11 @@ export default function PartnerTaskDefinitionForm({ selectedNode }) {
           <Tab>Exit Validation</Tab>
         </TabList>
         <TabPanels>
+          {/* Define Form */}
           <TabPanel>
-            <Form aria-label="approval form">
-              <Grid className="define-grid">
-                <Column className="col-margin" lg={16}>
-                  <TextInput id="one" labelText="Name*" />
-                </Column>
-                <Column className="col-margin" lg={16}>
-                  <TextArea id="one" labelText="Description" />
-                </Column>
-                <Column className="col-margin" lg={16}>
-                  <TextInput id="one" labelText="Estimate (Days)*" />
-                </Column>
-                <Column className="col-margin" lg={16}>
-                  <Select id={`select-1`} labelText="Role">
-                    <SelectItem value="" text="" />
-                    <SelectItem value="option-1" text="Option 1" />
-                    <SelectItem value="option-2" text="Option 2" />
-                  </Select>
-                </Column>
-              </Grid>
-              <Grid className="buttons-wrapper-grid">
-                <Column lg={8}>
-                  <Button type="button" kind="secondary" className="cancel-button" onClick={() => setOpen(true)}>
-                    Cancel
-                  </Button>
-                </Column>
-                <Column lg={8}>
-                  <Button type="submit" kind="secondary" className="save-button">
-                    Save
-                  </Button>
-                </Column>
-              </Grid>
-            </Form>
+            <PartnerDefineForm id={'partner-define-form'} setOpen={setOpen} />
           </TabPanel>
+          {/* Exit Validation Form */}
           <TabPanel>
             <ExitValidationFrom />
           </TabPanel>
