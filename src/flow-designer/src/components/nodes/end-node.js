@@ -1,17 +1,15 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Handle, Position } from 'reactflow';
-import './task-node.css';
 
-export default function EndNode(nodeConfig) {
+export default function EndNode({ data, isConnectable }) {
   return (
-    <div className="end-node-container">
+    <div style={{ border: '1px solid #ED3E32' }}>
       <Handle
-        id="end-node-left"
         type="target"
         position={Position.Left}
-        style={{ background: '#ED3E32' }}
-        isConnectable={nodeConfig?.isConnectable}
+        style={{ background: '#ED3E32', width: '16px', height: '16px' }}
+        onConnect={(params) => console.log('Left handle onConnect', params)}
+        isConnectable={isConnectable}
       />
     </div>
   );

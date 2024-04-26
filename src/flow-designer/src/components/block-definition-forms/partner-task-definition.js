@@ -34,7 +34,7 @@ export default function PartnerTaskDefinitionForm({ selectedNode }) {
                   </Select>
                 </Column>
               </Grid>
-              <Grid>
+              <Grid className="buttons-wrapper-grid">
                 <Column lg={8}>
                   <Button type="button" kind="secondary" className="cancel-button" onClick={() => setOpen(true)}>
                     Cancel
