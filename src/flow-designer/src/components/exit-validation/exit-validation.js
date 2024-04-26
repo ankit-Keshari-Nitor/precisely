@@ -75,7 +75,10 @@ export default function ExitValidation() {
   }, [rows]);
 
   //   const handelDeleteRow = (rowId) => {
+  //     console.log('rowId', rowId);
+  //     console.log('rowData', drows);
   //     // row.filter((item, index) => {
+  //     //   console.log('index', index);
   //     // });
   //     // const postArray = row.slice(Number(rowId) + 1, row.length);
   //     // const preArray = row.slice(0, Number(rowId));
