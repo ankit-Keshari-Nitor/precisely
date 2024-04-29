@@ -1,3 +1,3 @@
-import ActivityList from "./components/activity-list";
+import ActivityDashboard from './components/activity-dashboard';
 
-export default ActivityList
+export default ActivityDashboard;
