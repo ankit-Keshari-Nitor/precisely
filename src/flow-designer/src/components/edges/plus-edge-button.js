@@ -1,13 +1,13 @@
-import React from 'react';
-import './edge-add-button.scss';
-import { Popover, PopoverContent } from '@carbon/react';
-import { useState } from 'react';
-import { CATEGORY_TYPES, NODE_TYPES } from '../../../constants';
+import React, { useState } from 'react';
 import { getBezierPath } from 'reactflow';
+import { Popover, PopoverContent } from '@carbon/react';
 
-const EdgeAddButton = (props) => {
+import './style.scss';
+
+import { CATEGORY_TYPES, NODE_TYPES } from '../../constants';
+
+const PlusEdgeButton = (props) => {
   const { data, id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition } = props;
-  console.log('props', props);
   const [openContextMenu, setOpenContextMenu] = useState(false);
 
   const [labelX, labelY] = getBezierPath({
@@ -53,4 +53,4 @@ const EdgeAddButton = (props) => {
   );
 };
 
-export default EdgeAddButton;
+export default PlusEdgeButton;

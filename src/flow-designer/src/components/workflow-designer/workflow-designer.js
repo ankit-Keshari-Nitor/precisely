@@ -1,89 +1,26 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { addEdge, MarkerType, useNodesState, useEdgesState } from 'reactflow';
+import { addEdge, useNodesState, useEdgesState } from 'reactflow';
 
 import './workflow-designer.scss';
 
 import Designer from '../../../../page-designer/src';
 import componentMapper from '../../../../carbon-mappers/src';
-import { CrossEdge } from '../edges';
-import DialogFlowDesigner from '../dialog-flow-designer';
-import TaskFlowDesigner from '../task-flow-designer';
-import { StartNode, EndNode, GatewayNode, TaskNode } from '../nodes';
 
-const connectionLineStyle = { stroke: '#000' };
-const defaultViewport = { x: 0, y: 0, zoom: 1 };
-const snapGrid = [10, 10];
-const endMarks = {
-  type: MarkerType.ArrowClosed,
-  width: 20,
-  height: 20,
-  color: '#FF0072'
-};
-
-const TASK_INITIAL_NODES = [
-  {
-    id: '1',
-    type: 'start',
-    data: { label: 'Start' },
-    position: { x: 250, y: 300 },
-    sourcePosition: 'right'
-  },
-  {
-    id: '2',
-    type: 'end',
-    data: { label: 'End' },
-    position: { x: 450, y: 300 },
-    targetPosition: 'left'
-  }
-];
-
-const TASK_NODE_TYPES = {
-  start: StartNode,
-  end: EndNode,
-  partner: TaskNode,
-  approval: TaskNode,
-  attribute: TaskNode,
-  sponsor: TaskNode,
-  custom: TaskNode,
-  system: TaskNode,
-  gateway: GatewayNode
-};
-
-const TASK_EDGE_TYPES = {
-  crossEdge: CrossEdge
-};
-
-const DIALOG_INITIAL_NODES = [
-  {
-    id: '1',
-    type: 'start',
-    data: { label: 'Start' },
-    position: { x: 250, y: 300 },
-    sourcePosition: 'right'
-  },
-  {
-    id: '2',
-    type: 'end',
-    data: { label: 'End' },
-    position: { x: 450, y: 300 },
-    targetPosition: 'left'
-  }
-];
-
-const DIALOG_NODE_TYPES = {
-  start: StartNode,
-  end: EndNode,
-  form: TaskNode,
-  xslt: TaskNode,
-  api: TaskNode,
-  gateway: GatewayNode
-};
-
-const DIALOG_EDGE_TYPES = {
-  crossEdge: CrossEdge
-};
+import { DialogFlowDesigner, TaskFlowDesigner } from '../flow-designers';
+import {
+  connectionLineStyle,
+  defaultViewport,
+  snapGrid,
+  endMarks,
+  TASK_INITIAL_NODES,
+  TASK_NODE_TYPES,
+  TASK_EDGE_TYPES,
+  DIALOG_INITIAL_NODES,
+  DIALOG_NODE_TYPES,
+  DIALOG_EDGE_TYPES
+} from '../../constants';
 
 let dialogId = 0;
 const getNewDialogId = () => `Dialog_Name_${dialogId++}`;
@@ -121,7 +58,7 @@ export default function WorkFlowDesigner() {
       let newParam = params;
       newParam.type = 'crossEdge';
       newParam.markerEnd = endMarks;
-      setDialogEdges((eds) => addEdge({ ...newParam, animated: true, style: { stroke: '#000' } }, eds));
+      setDialogEdges((eds) => addEdge({ ...newParam, style: { stroke: '#000' } }, eds));
     },
     [setDialogEdges]
   );
@@ -184,7 +121,7 @@ export default function WorkFlowDesigner() {
     let newParam = params;
     newParam.type = 'crossEdge';
     newParam.markerEnd = endMarks;
-    setTaskEdges((eds) => addEdge({ ...newParam, animated: true, style: { stroke: '#000' } }, eds));
+    setTaskEdges((eds) => addEdge({ ...newParam, style: { stroke: '#000' } }, eds));
   }, []);
 
   const onTaskNodeDragOver = useCallback((event) => {

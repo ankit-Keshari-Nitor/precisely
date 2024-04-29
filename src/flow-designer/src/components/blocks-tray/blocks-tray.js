@@ -1,8 +1,8 @@
 import React from 'react';
-import './block-tray.css';
+import './blocks-tray.css';
 import { CATEGORY_TYPES, NODE_TYPES } from '../../constants';
 
-export const BlockTray = ({ category = CATEGORY_TYPES.TASK }) => {
+export const BlocksTray = ({ category = CATEGORY_TYPES.TASK }) => {
   const onDragStart = (event, node) => {
     event.dataTransfer.setData('application/nodeData', JSON.stringify(node));
     event.dataTransfer.effectAllowed = 'move';

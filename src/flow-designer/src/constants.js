@@ -11,6 +11,9 @@ import {
   ApiBlockIcon,
   XsltBlockIcon
 } from './icons';
+import { MarkerType } from 'reactflow';
+import { StartNode, EndNode, GatewayNode, TaskNode } from './components/nodes';
+import { CrossEdge } from './components/edges';
 
 export const CATEGORY_TYPES = {
   TASK: 'task',
@@ -197,3 +200,76 @@ export const NODE_TYPES = [
     category: CATEGORY_TYPES.DIALOG
   }
 ];
+
+export const connectionLineStyle = { stroke: '#000' };
+export const defaultViewport = { x: 0, y: 0, zoom: 1 };
+export const snapGrid = [10, 10];
+export const endMarks = {
+  type: MarkerType.ArrowClosed,
+  width: 20,
+  height: 20,
+  color: '#FF0072'
+};
+
+export const TASK_INITIAL_NODES = [
+  {
+    id: '1',
+    type: 'start',
+    data: { label: 'Start' },
+    position: { x: 250, y: 300 },
+    sourcePosition: 'right'
+  },
+  {
+    id: '2',
+    type: 'end',
+    data: { label: 'End' },
+    position: { x: 450, y: 300 },
+    targetPosition: 'left'
+  }
+];
+
+export const TASK_NODE_TYPES = {
+  start: StartNode,
+  end: EndNode,
+  partner: TaskNode,
+  approval: TaskNode,
+  attribute: TaskNode,
+  sponsor: TaskNode,
+  custom: TaskNode,
+  system: TaskNode,
+  gateway: GatewayNode
+};
+
+export const TASK_EDGE_TYPES = {
+  crossEdge: CrossEdge
+};
+
+export const DIALOG_INITIAL_NODES = [
+  {
+    id: '1',
+    type: 'start',
+    data: { label: 'Start' },
+    position: { x: 250, y: 300 },
+    sourcePosition: 'right'
+  },
+  {
+    id: '2',
+    type: 'end',
+    data: { label: 'End' },
+    position: { x: 450, y: 300 },
+    targetPosition: 'left'
+  }
+];
+
+export const DIALOG_NODE_TYPES = {
+  start: StartNode,
+  end: EndNode,
+  form: TaskNode,
+  xslt: TaskNode,
+  api: TaskNode,
+  gateway: GatewayNode
+};
+
+export const DIALOG_EDGE_TYPES = {
+  crossEdge: CrossEdge
+};
