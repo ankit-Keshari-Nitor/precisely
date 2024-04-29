@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Form, TextArea, TextInput, Button, Modal, Tabs, TabList, Tab, TabPanels, TabPanel, Column, Grid } from '@carbon/react';
+import { Modal, Tabs, TabList, Tab, TabPanels, TabPanel } from '@carbon/react';
 import './system-task-definition.scss';
 import ExitValidationFrom from '../../exit-validation-form';
+import SystemDefineForm from './system-define-form';
 
 export default function SystemTaskDefinitionForm({ selectedNode }) {
   const [open, setOpen] = useState(false);
@@ -13,30 +14,11 @@ export default function SystemTaskDefinitionForm({ selectedNode }) {
           <Tab>Exit Validation</Tab>
         </TabList>
         <TabPanels>
+          {/* Define Form */}
           <TabPanel>
-            <Form aria-label="approval form">
-              <Grid className="define-grid">
-                <Column className="col-margin" lg={16}>
-                  <TextInput id="one" labelText="Name*" />
-                </Column>
-                <Column className="col-margin" lg={16}>
-                  <TextArea id="one" labelText="Description" />
-                </Column>
-              </Grid>
-              <Grid className="buttons-wrapper-grid">
-                <Column lg={8}>
-                  <Button type="button" kind="secondary" className="cancel-button" onClick={() => setOpen(true)}>
-                    Cancel
-                  </Button>
-                </Column>
-                <Column lg={8}>
-                  <Button type="submit" kind="secondary" className="save-button">
-                    Save
-                  </Button>
-                </Column>
-              </Grid>
-            </Form>
+            <SystemDefineForm id={'system-define-form'} setOpen={setOpen} />
           </TabPanel>
+          {/* Exit Validation Form */}
           <TabPanel>
             <ExitValidationFrom />
           </TabPanel>
