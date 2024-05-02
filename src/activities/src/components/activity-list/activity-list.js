@@ -82,7 +82,10 @@ export default function ActivityList() {
   const actionOptions = [
     { id: 'edit', label: 'EDIT' },
     { id: 'save', label: 'SAVE' },
-    { id: 'delete', label: 'DELETE' }
+    { id: 'delete', label: 'DELETE' },
+    { id: 'test', label: 'TEST ' },
+    { id: 'rollout', label: 'ROLLOUT' },
+    { id: 'final', label: 'FINAL' },
   ];
 
   return (

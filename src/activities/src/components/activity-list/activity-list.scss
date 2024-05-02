@@ -3,8 +3,8 @@
   flex-direction: column;
   margin: 16px 0px;
   padding: 20px;
-  height: calc(100vh - 40px);
-  overflow-y: auto;
+ // height: calc(100vh - 40px);
+ // overflow: auto;
 }
 
 .cds--search {
@@ -14,7 +14,11 @@
 
 .cds--dropdown,
 .cds--list-box {
-  top: 15 !important;
+  top: 15% !important;
+}
+
+.cds--data-table-content {
+  overflow: visible !important;
 }
 
 .cds--search,
