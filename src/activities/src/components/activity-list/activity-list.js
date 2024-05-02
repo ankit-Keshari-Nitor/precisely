@@ -34,7 +34,7 @@ export default function ActivityList() {
     return data;
   };
 
-  const rows = generateData(100);
+  const [rows, setRows] = useState(generateData(100));
   const headers = [
     { key: 'name', header: 'Name' },
     { key: 'encrypted', header: 'Encrypted' },
@@ -77,6 +77,16 @@ export default function ActivityList() {
       direction = 'descending';
     }
     setSortConfig({ key, direction });
+  };
+
+  const handleDropdownChange = (rowId, selectedItem) => {
+    const newRows = rows.map(row => {
+      if (row.id === rowId) {
+        return { ...row, actions: selectedItem.label };
+      }
+      return row;
+    });
+    setRows(newRows);
   };
 
   const actionOptions = [
@@ -141,6 +151,7 @@ export default function ActivityList() {
                           label="Choose an action"
                           selectedItem={actionOptions.find(option => option.label === cell.value)}
                           itemToString={(item) => (item ? item.label : '')}
+                          onChange={({ selectedItem }) => handleDropdownChange(row.id, selectedItem)}
                         />
                       ) : (
                         cell.value
