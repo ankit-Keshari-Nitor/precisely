@@ -4,7 +4,7 @@ import React from 'react';
 export default function PartnerDefineForm({ id, setOpen }) {
   return (
     <>
-      <Form aria-label="approval form" data-testid={id}>
+      <Form aria-label="partner form" data-testid={id}>
         <Grid className="define-grid">
           <Column className="col-margin" lg={16}>
             <TextInput id="one" labelText="Name*" />
