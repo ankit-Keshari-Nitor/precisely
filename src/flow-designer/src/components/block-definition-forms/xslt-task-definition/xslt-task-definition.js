@@ -1,9 +1,16 @@
-import React from 'react';
-import { Form, Select, SelectItem, TextArea, TextInput, Checkbox, Button, Tabs, TabList, Tab, TabPanels, TabPanel, Column, Grid } from '@carbon/react';
+import React, { useState } from 'react';
+import { Form, Select, SelectItem, TextArea, TextInput, Checkbox, Button, Tabs, TabList, Tab, TabPanels, TabPanel, Column, Grid, Modal } from '@carbon/react';
 import './xslt-task-definition.scss';
 import ExitValidationFrom from '../../exit-validation-form';
+import XsltDefineForm from './xslt-define-form';
 
 export default function XsltTaskDefinitionForm({ selectedNode }) {
+  const [openCancelDialog, setOpenCancelDialog] = useState(false);
+
+  const onSubmitDefinitionForm = (data) => {
+    console.log('onSubmitDefinitionForm', data);
+  };
+
   return (
     <div className="activity-form">
       <Tabs>
@@ -15,28 +22,7 @@ export default function XsltTaskDefinitionForm({ selectedNode }) {
         <TabPanels>
           {/* Define Form */}
           <TabPanel>
-            <Form aria-label="approval form">
-              <Grid>
-                <Column className="col-margin" lg={16}>
-                  <TextInput id="one" labelText="Name" />
-                </Column>
-                <Column className="col-margin" lg={16}>
-                  <TextArea id="one" labelText="Description" />
-                </Column>
-              </Grid>
-              <Grid className="buttons-wrapper-grid">
-                <Column lg={8}>
-                  <Button type="button" kind="secondary" className="cancel-button">
-                    Cancel
-                  </Button>
-                </Column>
-                <Column lg={8}>
-                  <Button type="submit" kind="secondary" className="save-button">
-                    Save
-                  </Button>
-                </Column>
-              </Grid>
-            </Form>
+            <XsltDefineForm id={'xslt-define-Form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
           </TabPanel>
           {/* Properties Form */}
           <TabPanel>
@@ -80,6 +66,22 @@ export default function XsltTaskDefinitionForm({ selectedNode }) {
           </TabPanel>
         </TabPanels>
       </Tabs>
+      <Modal
+        open={openCancelDialog}
+        onRequestClose={() => setOpenCancelDialog(false)}
+        isFullWidth
+        modalHeading="Confirmation"
+        primaryButtonText="Exit"
+        secondaryButtonText="Cancel"
+      >
+        <p
+          style={{
+            padding: '0px 0px 1rem 1rem'
+          }}
+        >
+          Your changes are not saved. Do you want to exit without saving changes?{' '}
+        </p>
+      </Modal>
     </div>
   );
 }

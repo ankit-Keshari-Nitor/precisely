@@ -6,7 +6,12 @@ import ExitValidationFrom from '../../exit-validation-form';
 import CustomDefineForm from './custom-define-form';
 
 export default function CustomTaskDefinitionForm({ selectedNode }) {
-  const [open, setOpen] = useState(false);
+  const [openCancelDialog, setOpenCancelDialog] = useState(false);
+
+  const onSubmitDefinitionForm = (data) => {
+    console.log('onSubmitDefinitionForm', data);
+  };
+
   return (
     <div className="activity-form">
       <Tabs>
@@ -17,7 +22,7 @@ export default function CustomTaskDefinitionForm({ selectedNode }) {
         <TabPanels>
           {/* Define Form */}
           <TabPanel>
-            <CustomDefineForm id={'system-define-form'} setOpen={setOpen} />
+            <CustomDefineForm id={'custom-define-Form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
           </TabPanel>
           {/* Exit Validation Form */}
           <TabPanel>
@@ -25,8 +30,21 @@ export default function CustomTaskDefinitionForm({ selectedNode }) {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Modal open={open} onRequestClose={() => setOpen(false)} isFullWidth modalHeading="Confirmation" primaryButtonText="Delete" secondaryButtonText="Cancel">
-        Do you want to delete Custom Task-01?
+      <Modal
+        open={openCancelDialog}
+        onRequestClose={() => setOpenCancelDialog(false)}
+        isFullWidth
+        modalHeading="Confirmation"
+        primaryButtonText="Exit"
+        secondaryButtonText="Cancel"
+      >
+        <p
+          style={{
+            padding: '0px 0px 1rem 1rem'
+          }}
+        >
+          Your changes are not saved. Do you want to exit without saving changes?{' '}
+        </p>
       </Modal>
     </div>
   );
