@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { ExpandableSearch, Dropdown, Button, Pagination, Tag, DataTable, Table, TableHead, TableRow, TableHeader, TableBody, TableCell } from '@carbon/react';
+import {
+  ExpandableSearch, Dropdown, Button, Pagination, Tag, DataTable,
+  Table, TableHead, TableRow, TableHeader, TableBody, TableCell,
+} from '@carbon/react';
 import { CheckmarkFilled, NewTab, Add } from '@carbon/icons-react';
 import "./activity-list.scss";
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +33,7 @@ export default function ActivityList() {
         status: i % 2 === 0 ? 'Completed' : 'Pending',
         migrationstatus: i % 2 === 0 ? 'Completed' : 'Pending',
         version: 'Ver.3',
-        actions: i % 2 === 0 ? 'EDIT' : 'SAVE'
+        actions: i % 2 === 0 ? 'View' : 'Rollout'
       });
     }
     return data;
@@ -45,15 +48,14 @@ export default function ActivityList() {
     { key: 'migrationstatus', header: 'Migration Status' },
     { key: 'version', header: 'Version' },
     { key: 'actions', header: 'Actions' },
+   
   ];
 
   const actionOptions = [
-    { id: 'edit', label: 'EDIT' },
-    { id: 'save', label: 'SAVE' },
-    { id: 'delete', label: 'DELETE' },
-    { id: 'test', label: 'TEST ' },
-    { id: 'rollout', label: 'ROLLOUT' },
-    { id: 'final', label: 'FINAL' },
+    { id: 'view', label: 'View' },
+    { id: 'test', label: 'Test ' },
+    { id: 'rollout', label: 'Rollout' },
+    { id: 'mark as final', label: 'Mark as Final' },
   ];
 
   const filteredRows = rows.filter(row => {
@@ -156,11 +158,13 @@ export default function ActivityList() {
                           itemToString={(item) => (item ? item.label : '')}
                           onChange={({ selectedItem }) => handleDropdownChange(row.id, selectedItem)}
                         />
+
                       ) : (
                         cell.value
                       )}
                     </TableCell>
                   ))}
+                 
                 </TableRow>
               ))}
             </TableBody>
@@ -168,6 +172,7 @@ export default function ActivityList() {
         )}
       </DataTable>
       <Pagination
+        itemsPerPageText=""
         totalItems={filteredRows.length}
         pageSize={pageSize}
         page={currentPage}

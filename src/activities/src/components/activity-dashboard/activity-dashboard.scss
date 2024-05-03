@@ -1,4 +1,6 @@
 .activities-container {
   display: flex;
   flex-direction: column;
+  overflow: auto !important;
+  height: 100% !important;
 }
