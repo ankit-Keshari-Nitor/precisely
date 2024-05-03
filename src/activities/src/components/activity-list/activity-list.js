@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { ExpandableSearch, Dropdown, Button, Pagination, Tag, DataTable, Table, TableHead, TableRow, TableHeader, TableBody, TableCell } from '@carbon/react';
 import { CheckmarkFilled, NewTab, Add } from '@carbon/icons-react';
 import "./activity-list.scss";
+import { useNavigate } from 'react-router-dom';
 
 export default function ActivityList() {
+  let navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [filterKey, setFilterKey] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -35,6 +37,7 @@ export default function ActivityList() {
   };
 
   const [rows, setRows] = useState(generateData(100));
+
   const headers = [
     { key: 'name', header: 'Name' },
     { key: 'encrypted', header: 'Encrypted' },
@@ -42,6 +45,15 @@ export default function ActivityList() {
     { key: 'migrationstatus', header: 'Migration Status' },
     { key: 'version', header: 'Version' },
     { key: 'actions', header: 'Actions' },
+  ];
+
+  const actionOptions = [
+    { id: 'edit', label: 'EDIT' },
+    { id: 'save', label: 'SAVE' },
+    { id: 'delete', label: 'DELETE' },
+    { id: 'test', label: 'TEST ' },
+    { id: 'rollout', label: 'ROLLOUT' },
+    { id: 'final', label: 'FINAL' },
   ];
 
   const filteredRows = rows.filter(row => {
@@ -89,15 +101,6 @@ export default function ActivityList() {
     setRows(newRows);
   };
 
-  const actionOptions = [
-    { id: 'edit', label: 'EDIT' },
-    { id: 'save', label: 'SAVE' },
-    { id: 'delete', label: 'DELETE' },
-    { id: 'test', label: 'TEST ' },
-    { id: 'rollout', label: 'ROLLOUT' },
-    { id: 'final', label: 'FINAL' },
-  ];
-
   return (
     <div className="activities-list-container">
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', marginBottom: "1rem" }}>
@@ -107,7 +110,7 @@ export default function ActivityList() {
           onChange={event => setSearchQuery(event.target.value)}
           value={searchQuery}
         />
-        <Button style={{ marginLeft: "8px" }} renderIcon={NewTab}>
+        <Button style={{ marginLeft: "8px" }} renderIcon={NewTab} onClick={() => navigate('new-activity')}>
           New
         </Button>
         <Button kind="tertiary" style={{ marginLeft: "8px" }} renderIcon={Add}>
