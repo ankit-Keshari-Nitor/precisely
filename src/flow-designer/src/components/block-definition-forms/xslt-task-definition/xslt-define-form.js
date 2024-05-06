@@ -2,7 +2,7 @@ import { Form, Grid, Column, TextArea, TextInput, Button, Select, SelectItem } f
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-export default function PartnerDefineForm({ id, setOpenCancelDialog, onSubmitDefinitionForm }) {
+export default function XsltDefineForm({ id, setOpenCancelDialog, onSubmitDefinitionForm }) {
   const {
     register,
     formState: { errors },
@@ -13,15 +13,13 @@ export default function PartnerDefineForm({ id, setOpenCancelDialog, onSubmitDef
     mode: 'onChange',
     defaultValues: {
       name: '',
-      description: '',
-      estimateDays: 0,
-      role: 'none'
+      description: ''
     }
   });
 
   return (
     <>
-      <Form aria-label="partnerForm" name="partnerForm" data-testid={id} onSubmit={handleSubmit(onSubmitDefinitionForm)}>
+      <Form aria-label="xslt-define-Form" name="xslt-define-Form" data-testid={id} onSubmit={handleSubmit(onSubmitDefinitionForm)}>
         <Grid className="define-grid">
           <Column className="col-margin" lg={16}>
             <TextInput
@@ -51,32 +49,8 @@ export default function PartnerDefineForm({ id, setOpenCancelDialog, onSubmitDef
               })}
             />
           </Column>
-          <Column className="col-margin" lg={16}>
-            <TextInput
-              id="estimateDays"
-              data-testid="estimateDays"
-              labelText="Estimate (Days)*"
-              invalidText={errors.estimateDays?.message}
-              invalid={errors.estimateDays ? true : false}
-              {...register('estimateDays', {
-                required: 'Estimate Days is required'
-              })}
-            />
-          </Column>
-          <Column className="col-margin" lg={16}>
-            <Select id={`role`} data-testid="role" labelText="Role" {...register('role')}>
-              <SelectItem value="none" text="None" />
-              <SelectItem value="AssignRole_Auto_Sponsor" text="AssignRole_Auto_Sponsor" />
-              <SelectItem value="AssignRole_Auto_Sponsor2" text="AssignRole_Auto_Sponsor2" />
-              <SelectItem value="Both" text="Both" />
-              <SelectItem value="Both1" text="Both1" />
-              <SelectItem value="Both441344" text="BothDefect441344" />
-              <SelectItem value="BothRole1" text="BothRole1" />
-              <SelectItem value="BothRole2" text="BothRole2" />
-            </Select>
-          </Column>
         </Grid>
-        <Grid>
+        <Grid className="buttons-wrapper-grid">
           <Column lg={8}>
             <Button data-testid="cancel" name="cancel" kind="secondary" type="button" className="cancel-button" onClick={() => setOpenCancelDialog(true)}>
               Cancel
