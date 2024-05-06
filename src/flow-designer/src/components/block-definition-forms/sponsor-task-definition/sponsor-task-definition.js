@@ -3,6 +3,7 @@ import { Modal, Tabs, TabList, Tab, TabPanels, TabPanel } from '@carbon/react';
 import './sponsor-task-definition.scss';
 import ExitValidationFrom from '../../exit-validation-form/exit-validation-form';
 import SponsorDefineForm from './sponsor-define-form';
+import SponsorTaskDefinitionDdf from './sponsor-task-definition-ddf';
 
 export default function SponsorTaskDefinitionForm({ selectedNode }) {
   const [open, setOpen] = useState(false);
@@ -16,7 +17,8 @@ export default function SponsorTaskDefinitionForm({ selectedNode }) {
         <TabPanels>
           {/* Define Form */}
           <TabPanel>
-            <SponsorDefineForm id={'sponsor-define-form'} setOpen={setOpen} />
+            <SponsorTaskDefinitionDdf />
+            {/* <SponsorDefineForm id={'sponsor-define-form'} setOpen={setOpen} /> */}
           </TabPanel>
           {/* Exit Validation Form */}
           <TabPanel>
