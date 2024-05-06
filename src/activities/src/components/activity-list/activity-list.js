@@ -145,7 +145,7 @@ export default function ActivityList() {
           ]}
           label="Filter Option"
           selectedItem={filterKey}
-          onChange={({ selectedItem }) => setFilterKey(selectedItem.id)}
+          onChange={({ selectedItem }) => setFilterKey(selectedItem.label)}
         />
       </div>
       <DataTable rows={currentPageData} headers={headers}>
