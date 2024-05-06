@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { ExpandableSearch, Dropdown, Button, Pagination, Tag, DataTable, Table, TableHead, TableRow, TableHeader, TableBody, TableCell } from '@carbon/react';
+import {
+  ExpandableSearch, Dropdown, Button, Pagination, Tag, DataTable,
+  Table, TableHead, TableRow, TableHeader, TableBody, TableCell,
+  OverflowMenu, OverflowMenuItem,
+} from '@carbon/react';
 import { CheckmarkFilled, NewTab, Add } from '@carbon/icons-react';
 import "./activity-list.scss";
 import { useNavigate } from 'react-router-dom';
@@ -20,17 +24,32 @@ export default function ActivityList() {
     return <Tag className="some-class" type={status === 'Completed' ? "green" : "gray"}>{status}</Tag>;
   };
 
+  const getEllipsis = (i) => {
+    return (
+      <OverflowMenu size="sm" flipped className="always-visible-overflow-menu">
+         <OverflowMenuItem itemText="Edit" onClick={() => navigate(`/edit?id=${encodeURIComponent(i)}`)} />
+        <OverflowMenuItem itemText="Export" onClick={() => navigate(`/export?id=${encodeURIComponent(i)}`)}/>
+        <OverflowMenuItem itemText="Save as" onClick={() => navigate(`/saveas?id=${encodeURIComponent(i)}`)}/>
+        <OverflowMenuItem itemText="Shared/Unshared" onClick={() => navigate(`/shared?id=${encodeURIComponent(i)}`)}/>
+        <OverflowMenuItem itemText="Deavtivate" onClick={() => navigate(`/deactivate?id=${encodeURIComponent(i)}`)} />
+        <OverflowMenuItem itemText="Delete" onClick={() => navigate(`/delete?id=${encodeURIComponent(i)}`)}/>
+      </OverflowMenu>
+    );
+  };
+
   const generateData = (count) => {
     let data = [];
     for (let i = 1; i <= count; i++) {
+      const name = `Load balancer ${i}`;
       data.push({
         id: `id_${i}`,
-        name: `Load balancer ${i}`,
+        name: name,
         encrypted: getStatusIcon('Yes'),
         status: i % 2 === 0 ? 'Completed' : 'Pending',
         migrationstatus: i % 2 === 0 ? 'Completed' : 'Pending',
         version: 'Ver.3',
-        actions: i % 2 === 0 ? 'EDIT' : 'SAVE'
+        actions: i % 2 === 0 ? 'View' : 'Rollout',
+        ellipsis: getEllipsis(i)
       });
     }
     return data;
@@ -45,15 +64,14 @@ export default function ActivityList() {
     { key: 'migrationstatus', header: 'Migration Status' },
     { key: 'version', header: 'Version' },
     { key: 'actions', header: 'Actions' },
+    { key: 'ellipsis', header: '' },
   ];
 
   const actionOptions = [
-    { id: 'edit', label: 'EDIT' },
-    { id: 'save', label: 'SAVE' },
-    { id: 'delete', label: 'DELETE' },
-    { id: 'test', label: 'TEST ' },
-    { id: 'rollout', label: 'ROLLOUT' },
-    { id: 'final', label: 'FINAL' },
+    { id: 'view', label: 'View' },
+    { id: 'test', label: 'Test ' },
+    { id: 'rollout', label: 'Rollout' },
+    { id: 'mark as final', label: 'Mark as Final' },
   ];
 
   const filteredRows = rows.filter(row => {
@@ -127,7 +145,7 @@ export default function ActivityList() {
           ]}
           label="Filter Option"
           selectedItem={filterKey}
-          onChange={({ selectedItem }) => setFilterKey(selectedItem.id)}
+          onChange={({ selectedItem }) => setFilterKey(selectedItem.label)}
         />
       </div>
       <DataTable rows={currentPageData} headers={headers}>
@@ -136,7 +154,13 @@ export default function ActivityList() {
             <TableHead>
               <TableRow>
                 {headers.map(header => (
-                  <TableHeader {...getHeaderProps({ header })} isSortable onClick={() => handleSort(header.key)}>
+                  <TableHeader
+                    {...getHeaderProps({
+                      header,
+                      isSortable: header.key !== 'ellipsis' // Make header not sortable if it's the ellipsis column
+                    })}
+                    onClick={header.key !== 'ellipsis' ? () => handleSort(header.key) : undefined} // Prevent sorting function call for ellipsis column
+                  >
                     {header.header}
                   </TableHeader>
                 ))}
@@ -156,11 +180,13 @@ export default function ActivityList() {
                           itemToString={(item) => (item ? item.label : '')}
                           onChange={({ selectedItem }) => handleDropdownChange(row.id, selectedItem)}
                         />
+
                       ) : (
                         cell.value
                       )}
                     </TableCell>
                   ))}
+
                 </TableRow>
               ))}
             </TableBody>
@@ -168,6 +194,7 @@ export default function ActivityList() {
         )}
       </DataTable>
       <Pagination
+        itemsPerPageText=""
         totalItems={filteredRows.length}
         pageSize={pageSize}
         page={currentPage}
