@@ -1,3 +1,8 @@
+html,
+body {
+  overflow: visible !important;
+}
+
 .activities-list-container {
   display: flex;
   flex-direction: column;

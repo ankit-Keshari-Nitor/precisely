@@ -7,6 +7,9 @@ import { QueryBuilder, defaultOperators } from 'react-querybuilder';
 import CarbonWrapper from './carbonWrapper';
 
 export default function SystemTaskDefinitionForm({ selectedNode }) {
+  const [open, setOpen] = useState(false);
+
+  const [openCancelDialog, setOpenCancelDialog] = useState(false);
   const fields = [
     { name: 'firstName', label: 'DataType-1' },
     { name: 'lastName', label: 'DataType-2', operators: defaultOperators.filter((op) => op.name === '=' || op.name === 'in') }
@@ -23,10 +26,10 @@ export default function SystemTaskDefinitionForm({ selectedNode }) {
     { name: 'and', value: 'and', label: 'AND' },
     { name: 'or', value: 'or', label: 'OR' }
   ];
-
-  const [open, setOpen] = useState(false);
   const [query, setQuery] = useState(initialQuery);
-
+  const onSubmitDefinitionForm = (data) => {
+    console.log('onSubmitDefinitionForm', data);
+  };
   return (
     <div className="activity-form">
       <Tabs>
@@ -37,7 +40,7 @@ export default function SystemTaskDefinitionForm({ selectedNode }) {
         <TabPanels>
           {/* Define Form */}
           <TabPanel>
-            <SystemDefineForm id={'system-define-form'} setOpen={setOpen} />
+            <SystemDefineForm id={'system-define-form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
           </TabPanel>
           {/* Exit Validation Form */}
           <TabPanel>
@@ -63,8 +66,21 @@ export default function SystemTaskDefinitionForm({ selectedNode }) {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Modal open={open} onRequestClose={() => setOpen(false)} isFullWidth modalHeading="Confirmation" primaryButtonText="Delete" secondaryButtonText="Cancel">
-        Do you want to delete System-01?
+      <Modal
+        open={openCancelDialog}
+        onRequestClose={() => setOpenCancelDialog(false)}
+        isFullWidth
+        modalHeading="Confirmation"
+        primaryButtonText="Exit"
+        secondaryButtonText="Cancel"
+      >
+        <p
+          style={{
+            padding: '0px 0px 1rem 1rem'
+          }}
+        >
+          Your changes are not saved. Do you want to exit without saving changes?{' '}
+        </p>
       </Modal>
     </div>
   );

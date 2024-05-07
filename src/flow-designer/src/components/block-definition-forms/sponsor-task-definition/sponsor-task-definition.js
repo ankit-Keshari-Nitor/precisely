@@ -6,7 +6,12 @@ import SponsorDefineForm from './sponsor-define-form';
 import SponsorTaskDefinitionDdf from './sponsor-task-definition-ddf';
 
 export default function SponsorTaskDefinitionForm({ selectedNode }) {
-  const [open, setOpen] = useState(false);
+  const [openCancelDialog, setOpenCancelDialog] = useState(false);
+
+  const onSubmitDefinitionForm = (data) => {
+    console.log('onSubmitDefinitionForm', data);
+  };
+
   return (
     <div className="activity-form">
       <Tabs>
@@ -17,8 +22,10 @@ export default function SponsorTaskDefinitionForm({ selectedNode }) {
         <TabPanels>
           {/* Define Form */}
           <TabPanel>
+
             <SponsorTaskDefinitionDdf />
-            {/* <SponsorDefineForm id={'sponsor-define-form'} setOpen={setOpen} /> */}
+            {/* <SponsorDefineForm id={'sponsor-define-form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} /> */}
+
           </TabPanel>
           {/* Exit Validation Form */}
           <TabPanel>
@@ -26,8 +33,21 @@ export default function SponsorTaskDefinitionForm({ selectedNode }) {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Modal open={open} onRequestClose={() => setOpen(false)} isFullWidth modalHeading="Confirmation" primaryButtonText="Delete" secondaryButtonText="Cancel">
-        Do you want to delete Sponsor task-01?
+      <Modal
+        open={openCancelDialog}
+        onRequestClose={() => setOpenCancelDialog(false)}
+        isFullWidth
+        modalHeading="Confirmation"
+        primaryButtonText="Exit"
+        secondaryButtonText="Cancel"
+      >
+        <p
+          style={{
+            padding: '0px 0px 1rem 1rem'
+          }}
+        >
+          Your changes are not saved. Do you want to exit without saving changes?{' '}
+        </p>
       </Modal>
     </div>
   );
