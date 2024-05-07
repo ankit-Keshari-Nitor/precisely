@@ -6,9 +6,7 @@ export default function PartnerDefineForm({ id, setOpenCancelDialog, onSubmitDef
   const {
     register,
     formState: { errors },
-    handleSubmit,
-    getValues,
-    watch
+    handleSubmit
   } = useForm({
     mode: 'onChange',
     defaultValues: {

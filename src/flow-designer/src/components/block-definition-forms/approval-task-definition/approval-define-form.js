@@ -6,9 +6,7 @@ export default function ApprovalDefineForm({ id, setOpenCancelDialog, onSubmitDe
   const {
     register,
     formState: { errors },
-    handleSubmit,
-    getValues,
-    watch
+    handleSubmit
   } = useForm({
     mode: 'onChange',
     defaultValues: {

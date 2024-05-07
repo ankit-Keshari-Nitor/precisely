@@ -19,7 +19,8 @@ import {
   TASK_EDGE_TYPES,
   DIALOG_INITIAL_NODES,
   DIALOG_NODE_TYPES,
-  DIALOG_EDGE_TYPES
+  DIALOG_EDGE_TYPES,
+  NODE_TYPE
 } from '../../constants';
 
 let dialogId = 0;
@@ -49,8 +50,10 @@ export default function WorkFlowDesigner() {
   const [selectedDialogNode, setSelectedDialogNode] = useState(null);
 
   // --------------------------------- Dialog Flow Methods -----------------------------------
-  const onDialogNodeDoubleClick = (event) => {
-    setIsPageDesignerActive(true);
+  const onDialogNodeDoubleClick = (type) => {
+    if (type === NODE_TYPE.DIALOG) {
+      setIsPageDesignerActive(true);
+    }
   };
 
   const onDialogNodeConnect = useCallback(
@@ -98,23 +101,27 @@ export default function WorkFlowDesigner() {
   );
 
   const onDialogNodeClick = (event, node) => {
-    let copyNodes = dialogNodes;
-    copyNodes.map((copyNode) => {
-      if (node.id === copyNode.id) {
-        copyNode.data.borderColor = '#023FB2';
-      } else {
-        copyNode.data.borderColor = '#0585FC';
-      }
-      return copyNode;
-    });
-    setDialogNodes([...copyNodes]);
-    setSelectedDialogNode(node);
-    setOpenDialogPropertiesBlock(true);
+    if (node.type === NODE_TYPE.DIALOG || node.type === NODE_TYPE.XSLT || node.type === NODE_TYPE.API) {
+      let copyNodes = dialogNodes;
+      copyNodes.map((copyNode) => {
+        if (node.id === copyNode.id) {
+          copyNode.data.borderColor = '#023FB2';
+        } else {
+          copyNode.data.borderColor = '#0585FC';
+        }
+        return copyNode;
+      });
+      setDialogNodes([...copyNodes]);
+      setSelectedDialogNode(node);
+      setOpenDialogPropertiesBlock(true);
+    }
   };
 
   // --------------------------------- Task Flow Methods -----------------------------------
-  const onTaskNodeDoubleClick = (event) => {
-    setIsDialogFlowActive(true);
+  const onTaskNodeDoubleClick = (type) => {
+    if (type === NODE_TYPE.PARTNER || type === NODE_TYPE.SPONSOR || type === NODE_TYPE.CUSTOM || type === NODE_TYPE.SYSTEM) {
+      setIsDialogFlowActive(true);
+    }
   };
 
   const onTaskNodeConnect = useCallback((params) => {
@@ -159,18 +166,27 @@ export default function WorkFlowDesigner() {
   );
 
   const onTaskNodeClick = (event, node) => {
-    let copyNodes = taskNodes;
-    copyNodes.map((copyNode) => {
-      if (node.id === copyNode.id) {
-        copyNode.data.borderColor = '#023FB2';
-      } else {
-        copyNode.data.borderColor = '#0585FC';
-      }
-      return copyNode;
-    });
-    setTaskNodes([...copyNodes]);
-    setSelectedTaskNode(node);
-    setOpenTaskPropertiesBlock(true);
+    if (
+      node.type === NODE_TYPE.PARTNER ||
+      node.type === NODE_TYPE.APPROVAL ||
+      node.type === NODE_TYPE.ATTRIBUTE ||
+      node.type === NODE_TYPE.SPONSOR ||
+      node.type === NODE_TYPE.CUSTOM ||
+      node.type === NODE_TYPE.SYSTEM
+    ) {
+      let copyNodes = taskNodes;
+      copyNodes.map((copyNode) => {
+        if (node.id === copyNode.id) {
+          copyNode.data.borderColor = '#023FB2';
+        } else {
+          copyNode.data.borderColor = '#0585FC';
+        }
+        return copyNode;
+      });
+      setTaskNodes([...copyNodes]);
+      setSelectedTaskNode(node);
+      setOpenTaskPropertiesBlock(true);
+    }
   };
 
   return (

@@ -6,7 +6,7 @@ import {
   ApprovalTaskDefinitionForm,
   AttributeTaskDefinitionForm,
   CustomTaskDefinitionForm,
-  FormTaskDefinition,
+  DialogTaskDefinitionForm,
   GatewayTaskDefinitionForm,
   PartnerTaskDefinitionForm,
   SponsorTaskDefinitionForm,
@@ -32,8 +32,8 @@ export default function BlockPropertiesTray({ selectedNode, setOpenPropertiesBlo
         return <SystemTaskDefinitionForm selectedNode={selectedNode} />;
       case NODE_TYPE.GATEWAY:
         return <GatewayTaskDefinitionForm selectedNode={selectedNode} />;
-      case NODE_TYPE.FORM:
-        return <FormTaskDefinition selectedNode={selectedNode} />;
+      case NODE_TYPE.DIALOG:
+        return <DialogTaskDefinitionForm selectedNode={selectedNode} />;
       case NODE_TYPE.XSLT:
         return <XsltTaskDefinitionForm selectedNode={selectedNode} />;
       case NODE_TYPE.API:
