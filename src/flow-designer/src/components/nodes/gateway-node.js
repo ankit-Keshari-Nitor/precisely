@@ -6,10 +6,6 @@ import { GatewayNodeIcon } from '../../icons';
 import './style.scss';
 
 export default function GatewayNode(nodeConfig) {
-  const { onDoubleClick } = nodeConfig?.data;
-
-  const [openContextMenu, setOpenContextMenu] = useState(false);
-
   return (
     <div className="gateway-node-container">
       <Handle id="left" type="target" position={Position.Left} style={{ background: '#ed3e32' }} isConnectable={nodeConfig?.isConnectable} />

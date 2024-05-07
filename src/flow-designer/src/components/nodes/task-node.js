@@ -6,7 +6,9 @@ import { OverflowMenuVertical } from '@carbon/icons-react';
 import { Popover, PopoverContent } from '@carbon/react';
 
 export default function TaskNode(nodeConfig) {
-  const { borderColor, contextMenu, editableProps, taskName, onDoubleClick } = nodeConfig?.data;
+  const { borderColor, contextMenu, editableProps, taskName, onDoubleClick, type } = nodeConfig?.data;
+
+  console.log('nodeConfig', nodeConfig);
 
   const [openContextMenu, setOpenContextMenu] = useState(false);
 
@@ -15,7 +17,7 @@ export default function TaskNode(nodeConfig) {
       onClick={() => {
         setOpenContextMenu(!openContextMenu);
       }}
-      onDoubleClick={onDoubleClick}
+      onDoubleClick={() => onDoubleClick(type)}
       className="task-node-container"
       style={{ borderColor: borderColor, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
     >

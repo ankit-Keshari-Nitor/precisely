@@ -27,6 +27,8 @@ export const CATEGORY_TYPES = {
 };
 
 export const NODE_TYPE = {
+  START: 'start',
+  END: 'end',
   PARTNER: 'partner',
   APPROVAL: 'approval',
   ATTRIBUTE: 'attribute',
@@ -220,14 +222,14 @@ export const endMarks = {
 export const TASK_INITIAL_NODES = [
   {
     id: '1',
-    type: 'start',
+    type: NODE_TYPE.START,
     data: { label: 'Start' },
     position: { x: 250, y: 300 },
     sourcePosition: 'right'
   },
   {
     id: '2',
-    type: 'end',
+    type: NODE_TYPE.END,
     data: { label: 'End' },
     position: { x: 450, y: 300 },
     targetPosition: 'left'
