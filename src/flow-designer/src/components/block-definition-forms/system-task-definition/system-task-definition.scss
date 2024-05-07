@@ -1,3 +1,7 @@
+@import 'react-querybuilder/dist/query-builder.css';
+
+
+
 .form .title-bar {
   height: 54px;
   display: flex;
@@ -31,4 +35,8 @@
 .save-button:hover,
 .cancel-button:hover {
   opacity: 0.5;
+}
+
+[for="selector-label"] {
+  display: none;
 }
