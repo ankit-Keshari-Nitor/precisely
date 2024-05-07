@@ -99,7 +99,7 @@ export const SCHEMA = {
   ]
 };
 
-const SponsorDefineFormDDF = ({ id, setOpenCancelDialog, onSubmitDefinitionForm }) => (
+const PartnerDefineFormDDF = ({ id, setOpenCancelDialog, onSubmitDefinitionForm }) => (
   <FormRenderer
     id={id}
     FormTemplate={FORM_TEMPLATE}
@@ -111,4 +111,4 @@ const SponsorDefineFormDDF = ({ id, setOpenCancelDialog, onSubmitDefinitionForm 
   />
 );
 
-export default SponsorDefineFormDDF;
+export default PartnerDefineFormDDF;

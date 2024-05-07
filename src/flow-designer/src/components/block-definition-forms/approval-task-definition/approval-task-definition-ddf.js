@@ -92,14 +92,34 @@ export const SCHEMA = {
       ]
     },
     {
+      component: componentTypes.SELECT,
+      name: 'reopenTask',
+      labelText: 'Select Task to reopen up to when rejecting',
+      options: [
+        {
+          label: 'Task 1',
+          value: 'task-1'
+        },
+        {
+          label: 'Task 2',
+          value: 'task-2'
+        }
+      ]
+    },
+    {
       component: componentTypes.CHECKBOX,
       name: 'show_to_partner',
       labelText: 'Show to partner'
+    },
+    {
+      component: componentTypes.CHECKBOX,
+      name: 'enable_approval',
+      labelText: 'Enable auto approval warning'
     }
   ]
 };
 
-const SponsorDefineFormDDF = ({ id, setOpenCancelDialog, onSubmitDefinitionForm }) => (
+const ApprovalDefineFormDDF = ({ id, setOpenCancelDialog, onSubmitDefinitionForm }) => (
   <FormRenderer
     id={id}
     FormTemplate={FORM_TEMPLATE}
@@ -111,4 +131,4 @@ const SponsorDefineFormDDF = ({ id, setOpenCancelDialog, onSubmitDefinitionForm 
   />
 );
 
-export default SponsorDefineFormDDF;
+export default ApprovalDefineFormDDF;

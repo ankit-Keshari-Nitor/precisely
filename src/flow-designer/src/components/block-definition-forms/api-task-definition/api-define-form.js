@@ -1,4 +1,4 @@
-import { Form, Grid, Column, TextArea, TextInput, Button, Select, SelectItem } from '@carbon/react';
+import { Form, Grid, Column, TextArea, TextInput, Button } from '@carbon/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -7,8 +7,6 @@ export default function ApiDefineForm({ id, setOpenCancelDialog, onSubmitDefinit
     register,
     formState: { errors },
     handleSubmit,
-    getValues,
-    watch
   } = useForm({
     mode: 'onChange',
     defaultValues: {
