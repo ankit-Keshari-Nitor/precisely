@@ -3,7 +3,7 @@ import { Modal, Tabs, TabList, Tab, TabPanels, TabPanel } from '@carbon/react';
 
 import './custom-task-definition.scss';
 import ExitValidationFrom from '../../exit-validation-form';
-import CustomDefineForm from './custom-define-form';
+import CustomDefineFormDDF from './custom-task-definition-ddf';
 
 export default function CustomTaskDefinitionForm({ selectedNode }) {
   const [openCancelDialog, setOpenCancelDialog] = useState(false);
@@ -22,7 +22,7 @@ export default function CustomTaskDefinitionForm({ selectedNode }) {
         <TabPanels>
           {/* Define Form */}
           <TabPanel>
-            <CustomDefineForm id={'custom-define-Form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
+            <CustomDefineFormDDF id={'custom-define-Form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
           </TabPanel>
           {/* Exit Validation Form */}
           <TabPanel>

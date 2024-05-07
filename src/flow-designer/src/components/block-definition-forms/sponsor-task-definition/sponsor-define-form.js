@@ -7,8 +7,6 @@ export default function SponsorDefineForm({ id, setOpenCancelDialog, onSubmitDef
     register,
     formState: { errors },
     handleSubmit,
-    getValues,
-    watch
   } = useForm({
     mode: 'onChange',
     defaultValues: {

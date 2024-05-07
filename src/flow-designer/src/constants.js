@@ -14,6 +14,12 @@ import {
 import { MarkerType } from 'reactflow';
 import { StartNode, EndNode, GatewayNode, TaskNode } from './components/nodes';
 import { CrossEdge } from './components/edges';
+import { componentTypes, useFormApi, FormSpy } from '@data-driven-forms/react-form-renderer';
+import textField from '@data-driven-forms/carbon-component-mapper/text-field';
+import textarea from '@data-driven-forms/carbon-component-mapper/textarea';
+import select from '@data-driven-forms/carbon-component-mapper/select';
+import checkbox from '@data-driven-forms/carbon-component-mapper/checkbox';
+import { Button } from '@carbon/react';
 
 export const CATEGORY_TYPES = {
   TASK: 'task',
@@ -28,7 +34,7 @@ export const NODE_TYPE = {
   CUSTOM: 'custom',
   SYSTEM: 'system',
   GATEWAY: 'gateway',
-  FORM: 'form',
+  DIALOG: 'form',
   XSLT: 'xslt',
   API: 'api'
 };
@@ -140,9 +146,9 @@ export const NODE_TYPES = [
     category: CATEGORY_TYPES.TASK
   },
   {
-    type: NODE_TYPE.FORM,
+    type: NODE_TYPE.DIALOG,
     borderColor: '#0585FC',
-    taskName: 'Form Task',
+    taskName: 'Dialog Task',
     editableProps: {
       name: 'Form'
     },
@@ -272,4 +278,37 @@ export const DIALOG_NODE_TYPES = {
 
 export const DIALOG_EDGE_TYPES = {
   crossEdge: CrossEdge
+};
+
+export const COMPONENT_MAPPER = {
+  [componentTypes.TEXT_FIELD]: textField,
+  [componentTypes.TEXTAREA]: textarea,
+  [componentTypes.SELECT]: select,
+  [componentTypes.CHECKBOX]: checkbox
+};
+
+export const FORM_TEMPLATE = ({ formFields, schema }) => {
+  const { handleSubmit, onReset, onCancel, getState } = useFormApi();
+  const { submitting, valid, pristine } = getState();
+  return (
+    <form onSubmit={handleSubmit}>
+      {schema.title}
+      {formFields}
+      <FormSpy>
+        {() => (
+          <div style={{ marginTop: 10 }}>
+            <Button disabled={submitting || !valid} style={{ marginRight: 8 }} type="submit" color="primary" variant="contained">
+              Submit
+            </Button>
+            {/* <Button disabled={pristine} style={{ marginRight: 8 }} onClick={onReset} variant="contained">
+                  Reset
+                </Button> */}
+            <Button variant="contained" onClick={onCancel}>
+              Cancel
+            </Button>
+          </div>
+        )}
+      </FormSpy>
+    </form>
+  );
 };

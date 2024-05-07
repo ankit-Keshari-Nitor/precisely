@@ -6,9 +6,7 @@ export default function AttributeDefineForm({ id, setOpenCancelDialog, onSubmitD
   const {
     register,
     formState: { errors },
-    handleSubmit,
-    getValues,
-    watch
+    handleSubmit
   } = useForm({
     mode: 'onChange',
     defaultValues: {

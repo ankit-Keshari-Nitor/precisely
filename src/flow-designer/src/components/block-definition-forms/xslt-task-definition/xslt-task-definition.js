@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Select, SelectItem, TextArea, TextInput, Checkbox, Button, Tabs, TabList, Tab, TabPanels, TabPanel, Column, Grid, Modal } from '@carbon/react';
+import { Form, Select, SelectItem, TextArea, Checkbox, Button, Tabs, TabList, Tab, TabPanels, TabPanel, Column, Grid, Modal } from '@carbon/react';
 import './xslt-task-definition.scss';
 import ExitValidationFrom from '../../exit-validation-form';
-import XsltDefineForm from './xslt-define-form';
+import XsltDefineFormDDF from './xslt-task-definition-ddf';
 
 export default function XsltTaskDefinitionForm({ selectedNode }) {
   const [openCancelDialog, setOpenCancelDialog] = useState(false);
@@ -22,7 +22,7 @@ export default function XsltTaskDefinitionForm({ selectedNode }) {
         <TabPanels>
           {/* Define Form */}
           <TabPanel>
-            <XsltDefineForm id={'xslt-define-Form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
+            <XsltDefineFormDDF id={'xslt-define-Form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
           </TabPanel>
           {/* Properties Form */}
           <TabPanel>

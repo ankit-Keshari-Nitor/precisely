@@ -2,7 +2,7 @@ import { Form, Grid, Column, TextArea, TextInput, Button } from '@carbon/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-export default function SystemDefineForm({ id, setOpenCancelDialog, onSubmitDefinitionForm }) {
+export default function DialogDefineForm({ id, setOpenCancelDialog, onSubmitDefinitionForm }) {
   const {
     register,
     formState: { errors },

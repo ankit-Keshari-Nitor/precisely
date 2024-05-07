@@ -1,5 +1,5 @@
 import React from 'react';
-import './blocks-tray.css';
+import './blocks-tray.scss';
 import { CATEGORY_TYPES, NODE_TYPES } from '../../constants';
 
 export const BlocksTray = ({ category = CATEGORY_TYPES.TASK }) => {
