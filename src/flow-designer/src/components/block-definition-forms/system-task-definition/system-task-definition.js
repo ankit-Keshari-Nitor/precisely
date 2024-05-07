@@ -3,7 +3,7 @@ import { Modal, Tabs, TabList, Tab, TabPanels, TabPanel, Select, SelectItem, But
 import './system-task-definition.scss';
 import ExitValidationFrom from '../../exit-validation-form';
 import SystemDefineForm from './system-define-form';
-import { QueryBuilder, defaultOperators } from 'react-querybuilder';
+import { QueryBuilder, defaultOperators, formatQuery } from 'react-querybuilder';
 import CarbonWrapper from './carbonWrapper';
 
 export default function SystemTaskDefinitionForm({ selectedNode }) {
@@ -58,11 +58,12 @@ export default function SystemTaskDefinitionForm({ selectedNode }) {
               </CarbonWrapper>
             </div>
             {/* </QueryBuilderDnD> */}
-            <ExitValidationFrom />
-            {/* <h4>Query</h4>
+            <h4>Query</h4>
             <pre>
               <code>{formatQuery(query, 'json')}</code>
-            </pre> */}
+            </pre>
+            <div style={{ marginBottom: '1rem' }}></div>
+            <ExitValidationFrom />
           </TabPanel>
         </TabPanels>
       </Tabs>
