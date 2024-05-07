@@ -86,7 +86,7 @@ export default function ExitValidationFrom() {
   //   };
   return (
     <>
-      <Grid className="btn-add-group grid-margin-top">
+      {/* <Grid className="btn-add-group grid-margin-top">
         <Column lg={4} className="btn-add">
           <Button
             type="submit"
@@ -103,7 +103,7 @@ export default function ExitValidationFrom() {
             Group <Add />
           </Button>
         </Column>
-      </Grid>
+      </Grid> */}
       {rows.map((rowItem) => {
         return <>{rowItem}</>;
       })}
