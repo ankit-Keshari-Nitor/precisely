@@ -12,10 +12,10 @@ export const BlocksTray = ({ category = CATEGORY_TYPES.TASK }) => {
     <div className="task-tray-aside">
       {NODE_TYPES.filter((x) => x.category === category).map((node) => {
         return (
-          <div key={node.id} className="dnd-node" onDragStart={(event) => onDragStart(event, node)} draggable>
-            <button className="dnd-node-field">
-              <span className="dnd-node-field-icon">{node.nodeIcon}</span>
-              <span className="dnd-node-field-text"> {node.type}</span>
+          <div key={node.id} className="block-tray" onDragStart={(event) => onDragStart(event, node)} draggable>
+            <button className="block-tray-field">
+              <span className="block-tray-field-icon">{node.nodeIcon}</span>
+              <span className="block-tray-field-text"> {node.type}</span>
             </button>
           </div>
         );
