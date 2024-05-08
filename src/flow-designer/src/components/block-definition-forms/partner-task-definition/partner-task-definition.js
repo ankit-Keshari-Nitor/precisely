@@ -3,7 +3,7 @@ import { Modal, Tabs, TabList, Tab, TabPanels, TabPanel } from '@carbon/react';
 
 import './partner-task-definition.scss';
 import ExitValidationFrom from '../../exit-validation-form/exit-validation-form';
-import PartnerDefineFormDDF from './partner-task-definition-ddf';
+import PartnerDefineForm from './partner-define-form';
 
 export default function PartnerTaskDefinitionForm({ selectedNode }) {
   const [openCancelDialog, setOpenCancelDialog] = useState(false);
@@ -26,7 +26,7 @@ export default function PartnerTaskDefinitionForm({ selectedNode }) {
         <TabPanels>
           {/* Define Form */}
           <TabPanel>
-            <PartnerDefineFormDDF id={'partner-define-form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
+            <PartnerDefineForm id={'partner-define-form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
           </TabPanel>
           {/* Exit Validation Form */}
           <TabPanel>

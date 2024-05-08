@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import { Modal, Tabs, TabList, Tab, TabPanels, TabPanel, Select, SelectItem, Button, TextInput } from '@carbon/react';
+import { Modal, Tabs, TabList, Tab, TabPanels, TabPanel } from '@carbon/react';
 import './system-task-definition.scss';
 import ExitValidationFrom from '../../exit-validation-form';
-//import SystemDefineForm from './system-define-form';
 import { QueryBuilder, defaultOperators, formatQuery } from 'react-querybuilder';
 import CarbonWrapper from './carbonWrapper';
-import SystemDefineFormDDF from './system-task-definition-ddf';
+import SystemDefineForm from './system-define-form';
 
 export default function SystemTaskDefinitionForm({ selectedNode }) {
-  const [open, setOpen] = useState(false);
-
   const [openCancelDialog, setOpenCancelDialog] = useState(false);
   const fields = [
     { name: 'firstName', label: 'DataType-1' },
@@ -28,9 +25,11 @@ export default function SystemTaskDefinitionForm({ selectedNode }) {
     { name: 'or', value: 'or', label: 'OR' }
   ];
   const [query, setQuery] = useState(initialQuery);
+
   const onSubmitDefinitionForm = (data) => {
     console.log('onSubmitDefinitionForm', data);
   };
+
   return (
     <div className="activity-form">
       <Tabs>
@@ -41,8 +40,7 @@ export default function SystemTaskDefinitionForm({ selectedNode }) {
         <TabPanels>
           {/* Define Form */}
           <TabPanel>
-            {/* <SystemDefineForm id={'system-define-form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} /> */}
-            <SystemDefineFormDDF />
+            <SystemDefineForm id={'system-define-form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
           </TabPanel>
           {/* Exit Validation Form */}
           <TabPanel>

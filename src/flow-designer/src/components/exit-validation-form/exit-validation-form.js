@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Select, SelectItem, TextArea, TextInput, Checkbox, Button, Grid, Column } from '@carbon/react';
 import './exit-validation-form.scss';
-import { Add } from '@carbon/icons-react';
 import { CrossIcon, ElippsisIcon, MenuIcon } from '../../icons';
 
 export default function ExitValidationFrom() {
