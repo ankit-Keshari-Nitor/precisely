@@ -19,7 +19,7 @@ import textField from '@data-driven-forms/carbon-component-mapper/text-field';
 import textarea from '@data-driven-forms/carbon-component-mapper/textarea';
 import select from '@data-driven-forms/carbon-component-mapper/select';
 import checkbox from '@data-driven-forms/carbon-component-mapper/checkbox';
-import { Button } from '@carbon/react';
+import { Button, Column, Grid } from '@carbon/react';
 
 export const CATEGORY_TYPES = {
   TASK: 'task',
@@ -294,20 +294,33 @@ export const FORM_TEMPLATE = ({ formFields, schema }) => {
   const { submitting, valid, pristine } = getState();
   return (
     <form onSubmit={handleSubmit}>
-      {schema.title}
-      {formFields}
+      {formFields.map((formField) => (
+        <div className="form-field">{formField}</div>
+      ))}
       <FormSpy>
         {() => (
-          <div style={{ marginTop: 10 }}>
-            <Button disabled={submitting || !valid} style={{ marginRight: 8 }} type="submit" color="primary" variant="contained">
+          <div className="form-field">
+            <Grid className="buttons-wrapper-grid">
+              <Column lg={8}>
+                <Button data-testid="cancel" name="cancel" kind="secondary" type="button" className="cancel-button" onClick={onCancel}>
+                  Cancel
+                </Button>
+              </Column>
+              <Column lg={8}>
+                <Button disabled={submitting || !valid} data-testid="save" color="primary" variant="contained" type="submit">
+                  Save
+                </Button>
+              </Column>
+            </Grid>
+            {/* <Button disabled={submitting || !valid} style={{ marginRight: 8 }} type="submit" color="primary" variant="contained">
               Submit
             </Button>
-            {/* <Button disabled={pristine} style={{ marginRight: 8 }} onClick={onReset} variant="contained">
+            <Button disabled={pristine} style={{ marginRight: 8 }} onClick={onReset} variant="contained">
                   Reset
-                </Button> */}
+                </Button>
             <Button variant="contained" onClick={onCancel}>
               Cancel
-            </Button>
+            </Button> */}
           </div>
         )}
       </FormSpy>
