@@ -99,14 +99,14 @@ export const SCHEMA = {
   ]
 };
 
-const PartnerDefineForm = ({ id, setOpenCancelDialog, onSubmitDefinitionForm }) => (
+const PartnerDefineForm = ({ id, onCancelDefinitionForm, onSubmitDefinitionForm }) => (
   <FormRenderer
     id={id}
     FormTemplate={FORM_TEMPLATE}
     componentMapper={COMPONENT_MAPPER}
     schema={SCHEMA}
     onSubmit={onSubmitDefinitionForm}
-    onCancel={() => console.log('Cancelling')}
+    onCancel={() => onCancelDefinitionForm()}
     onReset={() => console.log('Resetting')}
   />
 );
