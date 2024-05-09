@@ -12,7 +12,6 @@ export default function PartnerTaskDefinitionForm({ selectedNode }) {
   const onSubmitDefinitionForm = (values, api) =>
     new Promise((resolve) =>
       setTimeout(() => {
-        console.log('FormValues', values);
         setDefineFormValue({ ...values });
         resolve('Yay');
       }, 1500)
@@ -21,8 +20,6 @@ export default function PartnerTaskDefinitionForm({ selectedNode }) {
   const onCancelDefinitionForm = () => {
     setOpenCancelDialog(true);
   };
-
-  console.log('defineFormValue', defineFormValue);
 
   return (
     <div className="activity-form">
