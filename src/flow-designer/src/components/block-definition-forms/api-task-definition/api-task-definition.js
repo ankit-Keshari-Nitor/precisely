@@ -3,7 +3,7 @@ import { Form, Link, Select, SelectItem, TextArea, FileUploader, TextInput, Chec
 import './api-task-definition.scss';
 import ExitValidationFrom from '../../exit-validation-form';
 import { ElippsisIcon } from '../../../icons';
-import ApiDefineFormDDF from './api-task-definition-ddf';
+import ApiDefineForm from './api-define-form';
 
 export default function ApiTaskDefinitionForm({ selectedNode }) {
   const [openCancelDialog, setOpenCancelDialog] = useState(false);
@@ -23,7 +23,7 @@ export default function ApiTaskDefinitionForm({ selectedNode }) {
         <TabPanels>
           {/* Define Form */}
           <TabPanel>
-            <ApiDefineFormDDF id={'api-define-from'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
+            <ApiDefineForm id={'api-define-from'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
           </TabPanel>
           {/* Properties Form */}
           <TabPanel>

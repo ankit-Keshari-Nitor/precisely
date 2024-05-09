@@ -300,14 +300,14 @@ export const FORM_TEMPLATE = ({ formFields, schema }) => {
       <FormSpy>
         {() => (
           <div className="form-field">
-            <Grid className="buttons-wrapper-grid">
+            <Grid>
               <Column lg={8}>
                 <Button data-testid="cancel" name="cancel" kind="secondary" type="button" className="cancel-button" onClick={onCancel}>
                   Cancel
                 </Button>
               </Column>
               <Column lg={8}>
-                <Button disabled={submitting || !valid} data-testid="save" color="primary" variant="contained" type="submit">
+                <Button disabled={submitting || !valid} data-testid="save" color="primary" variant="contained" type="submit" style={{ width: '100%' }}>
                   Save
                 </Button>
               </Column>

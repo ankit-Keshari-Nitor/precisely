@@ -7,9 +7,6 @@ import { Popover, PopoverContent } from '@carbon/react';
 
 export default function TaskNode(nodeConfig) {
   const { borderColor, contextMenu, editableProps, taskName, onDoubleClick, type } = nodeConfig?.data;
-
-  console.log('nodeConfig', nodeConfig);
-
   const [openContextMenu, setOpenContextMenu] = useState(false);
 
   return (
