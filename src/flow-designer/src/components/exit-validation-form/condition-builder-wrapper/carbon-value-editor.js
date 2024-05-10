@@ -1,8 +1,10 @@
 // import { Checkbox, Input, Radio, RadioGroup, Stack, Switch, Textarea } from '@chakra-ui/react';
-import { Checkbox, TextArea, TextInput, Toggle } from '@carbon/react';
+import { Checkbox, TextArea, TextInput, Toggle, Modal, TreeView, TreeNode, Button } from '@carbon/react';
 import * as React from 'react';
 // import { ValueEditorProps } from 'react-querybuilder';
 import { ValueSelector, getFirstOption, standardClassnames, useValueEditor } from 'react-querybuilder';
+import { ElippsisIcon } from '../../../icons';
+import { useState } from 'react';
 
 // type ChakraValueEditorProps = ValueEditorProps & { extraProps?: Record<string, any> };
 
@@ -28,6 +30,8 @@ const CarbonValueEditor = (allProps) => {
     ...props
   } = allProps;
 
+  const [openCancelDialog, setOpenCancelDialog] = useState(false);
+
   const { valueAsArray, multiValueHandler } = useValueEditor({
     handleOnChange,
     inputType,
@@ -43,6 +47,23 @@ const CarbonValueEditor = (allProps) => {
     return null;
   }
 
+  const operandSelector = (selectedValue) => {
+    //operandOne('Disabled-2');
+    handleOnChange(selectedValue);
+    setOpenCancelDialog(false);
+  };
+
+  const Temp = (
+    <TreeView label="Demo Data">
+      <TreeNode label="Enabled-1">
+        <TreeNode label="Disabled-1" onClick={(e) => operandSelector('Disabled-1')} />
+      </TreeNode>
+      <TreeNode label="Enabled-2">
+        <TreeNode label="Disabled-2" onClick={(e) => operandSelector('Disabled-2')} />
+      </TreeNode>
+    </TreeView>
+  );
+
   const placeHolderText = fieldData?.placeholder ?? '';
   const inputTypeCoerced = ['in', 'notIn'].includes(operator[1]) ? 'text' : inputType || 'text';
 
@@ -54,7 +75,7 @@ const CarbonValueEditor = (allProps) => {
             key={key}
             type={inputTypeCoerced}
             value={valueAsArray[i] ?? ''}
-            isDisabled={disabled}
+            //isDisabled={disabled}
             className={standardClassnames.valueListItem}
             placeholder={placeHolderText}
             onChange={(e) => multiValueHandler(e.target.value, i)}
@@ -109,7 +130,7 @@ const CarbonValueEditor = (allProps) => {
         <TextArea
           value={value}
           title={title}
-          isDisabled={disabled}
+          //isDisabled={disabled}
           className={className}
           placeholder={placeHolderText}
           onChange={(e) => handleOnChange(e.target.value)}
@@ -118,10 +139,10 @@ const CarbonValueEditor = (allProps) => {
       );
 
     case 'switch':
-      return <Toggle className={className} isChecked={!!value} title={title} isDisabled={disabled} onChange={(e) => handleOnChange(e.target.checked)} {...extraProps} />;
+      return <Toggle className={className} isChecked={!!value} title={title} onChange={(e) => handleOnChange(e.target.checked)} {...extraProps} />;
 
     case 'checkbox':
-      return <Checkbox className={className} title={title} isDisabled={disabled} onChange={(e) => handleOnChange(e.target.checked)} isChecked={!!value} {...extraProps} />;
+      return <Checkbox className={className} title={title} onChange={(e) => handleOnChange(e.target.checked)} isChecked={!!value} {...extraProps} />;
 
     // case 'radio':
     //   return (
@@ -144,16 +165,22 @@ const CarbonValueEditor = (allProps) => {
   }
 
   return (
-    <TextInput
-      type={inputTypeCoerced}
-      value={value}
-      title={title}
-      isDisabled={disabled}
-      className={className}
-      placeholder={'Operand'}
-      onChange={(e) => handleOnChange(e.target.value)}
-      {...extraProps}
-    />
+    <>
+      <TextInput
+        type={inputTypeCoerced}
+        value={value}
+        title={title}
+        //isDisabled={disabled}
+        className={className}
+        placeholder={'Operand'}
+        onChange={(e) => handleOnChange(e.target.value)}
+        {...extraProps}
+      />
+      <Button size="md" className="opt-btn" kind="secondary" renderIcon={ElippsisIcon} onClick={() => setOpenCancelDialog(true)}></Button>
+      <Modal open={openCancelDialog} onRequestClose={() => setOpenCancelDialog(false)} passiveModal>
+        {Temp}
+      </Modal>
+    </>
   );
 };
 
