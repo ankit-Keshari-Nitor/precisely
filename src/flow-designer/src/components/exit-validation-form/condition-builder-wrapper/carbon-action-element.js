@@ -8,6 +8,7 @@ const CarbonActionElement = ({
   title,
   disabled,
   disabledTranslation,
+  separator,
   // Props that should not be in extraProps
   testID: _testID,
   rules: _rules,
@@ -26,8 +27,7 @@ const CarbonActionElement = ({
     disabled={disabled && !disabledTranslation}
     {...extraProps}
   >
-    {disabledTranslation && disabled ? disabledTranslation.label : label}
+    {disabledTranslation && disabled ? disabledTranslation.label : label.split(' ').reverse().join('   ')}
   </Button>
 );
-
 export default CarbonActionElement;

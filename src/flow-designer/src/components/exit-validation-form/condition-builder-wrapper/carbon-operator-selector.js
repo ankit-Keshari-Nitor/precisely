@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { toOptions, useValueEditor } from 'react-querybuilder';
-import { Select, TextInput } from '@carbon/react';
+import { Button, Modal, Select, TextInput, TreeView, TreeNode } from '@carbon/react';
+import { ElippsisIcon } from '../../../icons';
+import { useState } from 'react';
 
 const CarbonOperatorSelector = ({
   className,
@@ -25,6 +27,9 @@ const CarbonOperatorSelector = ({
   schema: _schema,
   ...extraProps
 }) => {
+  const [openCancelDialog, setOpenCancelDialog] = useState(false);
+  //const [operandOne, setOperandOne] = useState('');
+
   const { valueAsArray, multiValueHandler } = useValueEditor({
     handleOnChange,
     inputType: 'text',
@@ -36,6 +41,23 @@ const CarbonOperatorSelector = ({
     values: []
   });
 
+  const operandSelector = (selectedValue) => {
+    //operandOne('Disabled-2');
+    multiValueHandler(selectedValue, 0);
+    setOpenCancelDialog(false);
+  };
+
+  const Temp = (
+    <TreeView label="Demo Data">
+      <TreeNode label="Enabled-1">
+        <TreeNode label="Disabled-1" onClick={(e) => operandSelector('Disabled-1')} />
+      </TreeNode>
+      <TreeNode label="Enabled-2">
+        <TreeNode label="Disabled-2" onClick={(e) => operandSelector('Disabled-2')} />
+      </TreeNode>
+    </TreeView>
+  );
+
   return (
     <>
       <TextInput
@@ -43,13 +65,18 @@ const CarbonOperatorSelector = ({
         type="text"
         value={valueAsArray.length > 1 ? valueAsArray[0] : ''}
         title={title}
-        isDisabled={disabled}
+        //isDisabled={disabled}
         className={className}
         placeholder={'Operand'}
         labelText={''}
         onChange={(e) => multiValueHandler(e.target.value, 0)}
         {...extraProps}
       />
+      <Button size="md" className="opt-btn" kind="secondary" renderIcon={ElippsisIcon} onClick={() => setOpenCancelDialog(true)}></Button>
+      <Modal open={openCancelDialog} onRequestClose={() => setOpenCancelDialog(false)} passiveModal>
+        {Temp}
+      </Modal>
+
       <Select
         id="selector-label"
         className={className}
