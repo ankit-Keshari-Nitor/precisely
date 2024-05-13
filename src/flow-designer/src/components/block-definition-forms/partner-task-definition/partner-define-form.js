@@ -1,92 +1,114 @@
-import { Form, Grid, Column, TextArea, TextInput, Button, Select, SelectItem } from '@carbon/react';
+/* eslint-disable react/prop-types */
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
+import { FORM_TEMPLATE, COMPONENT_MAPPER } from '../../../constants';
+import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 
-export default function PartnerDefineForm({ id, setOpenCancelDialog, onSubmitDefinitionForm }) {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit
-  } = useForm({
-    mode: 'onChange',
-    defaultValues: {
-      name: '',
-      description: '',
-      estimateDays: 0,
-      role: 'none'
+export const SCHEMA = {
+  fields: [
+    {
+      component: componentTypes.TEXT_FIELD,
+      name: 'name',
+      labelText: 'Name*',
+      helperText: 'Name should not contain &,<,>,",\',.,{,}, characters.',
+      isRequired: true,
+      validate: [
+        {
+          type: validatorTypes.REQUIRED,
+          message: 'Name is required'
+        },
+        {
+          type: validatorTypes.PATTERN,
+          pattern: /^[^&<>"'.{}]+$/i,
+          message: 'Name should not contain &,<,>,",\',.,{,}, characters.'
+        },
+        {
+          type: validatorTypes.MAX_LENGTH,
+          threshold: 100,
+          message: 'Name must be no longer then 100 characters'
+        }
+      ]
+    },
+    {
+      component: componentTypes.TEXTAREA,
+      name: 'description',
+      labelText: 'Description*',
+      isRequired: true,
+      validate: [
+        {
+          type: validatorTypes.REQUIRED
+        },
+        {
+          type: validatorTypes.MAX_LENGTH,
+          threshold: 100,
+          message: 'Name must be no longer then 100 characters'
+        }
+      ]
+    },
+    {
+      component: componentTypes.TEXT_FIELD,
+      name: 'estimate_days',
+      labelText: 'Estimate (Days)*',
+      isRequired: true,
+      validate: [
+        {
+          type: validatorTypes.REQUIRED
+        }
+      ]
+    },
+    {
+      component: componentTypes.SELECT,
+      name: 'role',
+      labelText: 'Role',
+      options: [
+        {
+          label: 'AssignRole_Auto_Sponsor',
+          value: 'AssignRole_Auto_Sponsor'
+        },
+        {
+          label: 'AssignRole_Auto_Sponsor2',
+          value: 'AssignRole_Auto_Sponsor2'
+        },
+        {
+          label: 'Both',
+          value: 'Both'
+        },
+        {
+          label: 'Both1',
+          value: 'Both1'
+        },
+        {
+          label: 'Both441344',
+          value: 'Both441344'
+        },
+        {
+          label: 'BothRole1',
+          value: 'BothRole1'
+        },
+        {
+          label: 'BothRole2',
+          value: 'BothRole2'
+        }
+      ]
+    },
+    {
+      component: componentTypes.CHECKBOX,
+      name: 'show_to_partner',
+      labelText: 'Show to partner'
     }
-  });
+  ]
+};
 
-  return (
-    <>
-      <Form aria-label="partnerForm" name="partnerForm" data-testid={id} onSubmit={handleSubmit(onSubmitDefinitionForm)}>
-        <Grid className="define-grid">
-          <Column className="col-margin" lg={16}>
-            <TextInput
-              id="name"
-              data-testid="name"
-              labelText="Name*"
-              invalidText={errors.name?.message}
-              invalid={errors.name ? true : false}
-              helperText={'Should not contain &,<,>,",\',.,{,}, characters.'}
-              {...register('name', {
-                required: 'Name is required',
-                pattern: { value: /^[^&<>"'.{}]+$/i, message: 'Name should not contain &,<,>,",\',.,{,}, characters.' },
-                maxLength: { value: 100, message: 'Name must be no longer then 100 characters' }
-              })}
-            />
-          </Column>
-          <Column className="col-margin" lg={16}>
-            <TextArea
-              id="description"
-              data-testid="description"
-              labelText="Description*"
-              invalidText={errors.description?.message}
-              invalid={errors.description ? true : false}
-              {...register('description', {
-                required: 'Description is required',
-                maxLength: { value: 100, message: 'Description must be no longer then 100 characters' }
-              })}
-            />
-          </Column>
-          <Column className="col-margin" lg={16}>
-            <TextInput
-              id="estimateDays"
-              data-testid="estimateDays"
-              labelText="Estimate (Days)*"
-              invalidText={errors.estimateDays?.message}
-              invalid={errors.estimateDays ? true : false}
-              {...register('estimateDays', {
-                required: 'Estimate Days is required'
-              })}
-            />
-          </Column>
-          <Column className="col-margin" lg={16}>
-            <Select id={`role`} data-testid="role" labelText="Role" {...register('role')}>
-              <SelectItem value="none" text="None" />
-              <SelectItem value="AssignRole_Auto_Sponsor" text="AssignRole_Auto_Sponsor" />
-              <SelectItem value="AssignRole_Auto_Sponsor2" text="AssignRole_Auto_Sponsor2" />
-              <SelectItem value="Both" text="Both" />
-              <SelectItem value="Both1" text="Both1" />
-              <SelectItem value="Both441344" text="BothDefect441344" />
-              <SelectItem value="BothRole1" text="BothRole1" />
-              <SelectItem value="BothRole2" text="BothRole2" />
-            </Select>
-          </Column>
-        </Grid>
-        <Grid>
-          <Column lg={8}>
-            <Button data-testid="cancel" name="cancel" kind="secondary" type="button" className="cancel-button" onClick={() => setOpenCancelDialog(true)}>
-              Cancel
-            </Button>
-          </Column>
-          <Column lg={8}>
-            <Button data-testid="save" name="save" kind="secondary" type="submit" className="save-button">
-              Save
-            </Button>
-          </Column>
-        </Grid>
-      </Form>
-    </>
-  );
-}
+const PartnerDefineForm = ({ id, onCancelDefinitionForm, onSubmitDefinitionForm }) => (
+  <FormRenderer
+    id={id}
+    FormTemplate={FORM_TEMPLATE}
+    componentMapper={COMPONENT_MAPPER}
+    schema={SCHEMA}
+    onSubmit={onSubmitDefinitionForm}
+    onCancel={() => onCancelDefinitionForm()}
+    onReset={() => console.log('Resetting')}
+  />
+);
+
+export default PartnerDefineForm;

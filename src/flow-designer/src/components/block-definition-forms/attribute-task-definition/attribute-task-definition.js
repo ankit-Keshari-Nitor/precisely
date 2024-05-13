@@ -3,7 +3,7 @@ import { Modal, Tabs, TabList, Tab, TabPanels, TabPanel } from '@carbon/react';
 
 import './attribute-task-definition.scss';
 import ExitValidationFrom from '../../exit-validation-form';
-import AttributeDefineFormDDF from './attribute-task-definition-ddf';
+import AttributeDefineForm from './attribute-define-form';
 
 export default function AttributeTaskDefinitionForm({ selectedNode }) {
   const [openCancelDialog, setOpenCancelDialog] = useState(false);
@@ -22,7 +22,7 @@ export default function AttributeTaskDefinitionForm({ selectedNode }) {
         <TabPanels>
           {/* Define Form */}
           <TabPanel>
-            <AttributeDefineFormDDF id={'attribute-define-form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
+            <AttributeDefineForm id={'attribute-define-form'} setOpenCancelDialog={setOpenCancelDialog} onSubmitDefinitionForm={onSubmitDefinitionForm} />
           </TabPanel>
           {/* Exit Validation Form */}
           <TabPanel>
