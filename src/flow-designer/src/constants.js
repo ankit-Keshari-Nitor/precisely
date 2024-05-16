@@ -46,9 +46,7 @@ export const NODE_TYPES = [
     type: NODE_TYPE.PARTNER,
     borderColor: '#0585FC',
     taskName: 'Partner Task',
-    editableProps: {
-      name: 'Partner'
-    },
+    editableProps: {},
     contextMenu: [
       { label: 'Delete', action: 'delete' },
       { label: 'Clone', action: 'clone' },
@@ -61,9 +59,7 @@ export const NODE_TYPES = [
     type: NODE_TYPE.APPROVAL,
     borderColor: '#0585FC',
     taskName: 'Approval Task',
-    editableProps: {
-      name: 'Approval'
-    },
+    editableProps: {},
     contextMenu: [
       { label: 'Delete', action: 'delete' },
       { label: 'Clone', action: 'clone' },
@@ -76,9 +72,7 @@ export const NODE_TYPES = [
     type: NODE_TYPE.ATTRIBUTE,
     borderColor: '#0585FC',
     taskName: 'Attribute Task',
-    editableProps: {
-      name: 'Attribute'
-    },
+    editableProps: {},
     contextMenu: [
       { label: 'Delete', action: 'delete' },
       { label: 'Clone', action: 'clone' },
@@ -91,9 +85,7 @@ export const NODE_TYPES = [
     type: NODE_TYPE.SPONSOR,
     borderColor: '#0585FC',
     taskName: 'Sponsor Task',
-    editableProps: {
-      name: 'Sponsor'
-    },
+    editableProps: {},
     contextMenu: [
       { label: 'Delete', action: 'delete' },
       { label: 'Clone', action: 'clone' },
@@ -106,9 +98,7 @@ export const NODE_TYPES = [
     type: NODE_TYPE.CUSTOM,
     borderColor: '#0585FC',
     taskName: 'Custom Task',
-    editableProps: {
-      name: 'Custom'
-    },
+    editableProps: {},
     contextMenu: [
       { label: 'Delete', action: 'delete' },
       { label: 'Clone', action: 'clone' },
@@ -121,9 +111,7 @@ export const NODE_TYPES = [
     type: NODE_TYPE.SYSTEM,
     borderColor: '#0585FC',
     taskName: 'System Task',
-    editableProps: {
-      name: 'System'
-    },
+    editableProps: {},
     contextMenu: [
       { label: 'Delete', action: 'delete' },
       { label: 'Clone', action: 'clone' },
@@ -307,20 +295,11 @@ export const FORM_TEMPLATE = ({ formFields, schema }) => {
                 </Button>
               </Column>
               <Column lg={8}>
-                <Button disabled={submitting || !valid} data-testid="save" color="primary" variant="contained" type="submit" style={{ width: '100%' }}>
+                <Button data-testid="save" color="primary" variant="contained" type="submit" style={{ width: '100%' }}>
                   Save
                 </Button>
               </Column>
             </Grid>
-            {/* <Button disabled={submitting || !valid} style={{ marginRight: 8 }} type="submit" color="primary" variant="contained">
-              Submit
-            </Button>
-            <Button disabled={pristine} style={{ marginRight: 8 }} onClick={onReset} variant="contained">
-                  Reset
-                </Button>
-            <Button variant="contained" onClick={onCancel}>
-              Cancel
-            </Button> */}
           </div>
         )}
       </FormSpy>
