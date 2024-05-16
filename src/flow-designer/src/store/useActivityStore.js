@@ -25,14 +25,14 @@ const activityStore = (set, get) => ({
   },
   addDilogNodes: (taskNode, dilogNode) => {
     set((state) => {
-      const TaskNodeData = state.activities.taskNodes.map((node) => {
+      const taskNodeData = state.activities.taskNodes.map((node) => {
         if (node.id === taskNode.id) {
           return node.data.dialogNodes.concat(dilogNode);
         } else {
           return node;
         }
       });
-      return { activities: { taskNodes: TaskNodeData, taskEdges: state.activities.taskEdges } };
+      return { activities: { taskNodes: taskNodeData, taskEdges: state.activities.taskEdges } };
     });
   },
   issueActivity: (id) => {

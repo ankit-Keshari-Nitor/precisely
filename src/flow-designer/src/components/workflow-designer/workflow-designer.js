@@ -14,7 +14,6 @@ import {
   defaultViewport,
   snapGrid,
   endMarks,
-  TASK_INITIAL_NODES,
   TASK_NODE_TYPES,
   TASK_EDGE_TYPES,
   DIALOG_INITIAL_NODES,
@@ -80,7 +79,7 @@ export default function WorkFlowDesigner() {
 
   useEffect(() => {
     setTaskNodes(storeData.taskNodes);
-  }, [storeData]);
+  }, [setTaskNodes, storeData]);
 
   const onDialogNodeDrop = useCallback(
     (event) => {
@@ -109,7 +108,7 @@ export default function WorkFlowDesigner() {
       //setDialogNodes((nds) => nds.concat(newDialog));
       addDilogNode(selectedTaskNode, newDialog);
     },
-    [dialogFlowInstance]
+    [addDilogNode, dialogFlowInstance, selectedTaskNode]
   );
 
   const onDialogNodeClick = (event, node) => {
@@ -141,7 +140,7 @@ export default function WorkFlowDesigner() {
     newParam.type = 'crossEdge';
     newParam.markerEnd = endMarks;
     setTaskEdges((eds) => addEdge({ ...newParam, style: { stroke: '#000' } }, eds));
-  }, []);
+  }, [setTaskEdges]);
 
   const onTaskNodeDragOver = useCallback((event) => {
     event.preventDefault();
@@ -176,7 +175,7 @@ export default function WorkFlowDesigner() {
       //storeData.taskNodes = storeData.taskNodes.concat(newTask);
       addTaskNode(newTask);
     },
-    [taskFlowInstance]
+    [addTaskNode, taskFlowInstance]
   );
 
   const onTaskNodeClick = (event, node) => {

@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { TextArea, Grid, Column } from '@carbon/react';
 import './exit-validation-form.scss';
 import CarbonWrapper from './condition-builder-wrapper/carbon-wrapper';
-import QueryBuilder, { defaultOperators, formatQuery } from 'react-querybuilder';
-import { QueryBuilderDnD } from '@react-querybuilder/dnd';
-import * as ReactDnD from 'react-dnd';
-import * as ReactDndHtml5Backend from 'react-dnd-html5-backend';
+import QueryBuilder, { defaultOperators } from 'react-querybuilder';
 
 export default function ExitValidationFrom() {
   const fields = [
