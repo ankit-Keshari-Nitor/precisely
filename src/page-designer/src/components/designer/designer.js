@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useState, useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 import './designer.scss';

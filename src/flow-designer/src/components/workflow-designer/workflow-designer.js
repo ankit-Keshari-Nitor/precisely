@@ -82,7 +82,7 @@ export default function WorkFlowDesigner() {
       const dialogNodeData = storeData.taskNodes.filter((node) => node.id === selectedTaskNode.id)[0];
       setDialogNodes(dialogNodeData?.data?.dialogNodes);
     }
-  }, [storeData]);
+  }, [setTaskNodes, storeData]);
 
   const onDialogNodeDrop = useCallback(
     (event) => {
@@ -110,7 +110,7 @@ export default function WorkFlowDesigner() {
 
       addDialogNodes(selectedTaskNode, newDialog);
     },
-    [dialogFlowInstance]
+    [addDialogNodes, dialogFlowInstance, selectedTaskNode]
   );
 
   const onDialogNodeClick = (event, node) => {
@@ -137,12 +137,15 @@ export default function WorkFlowDesigner() {
     }
   };
 
-  const onTaskNodeConnect = useCallback((params) => {
-    let newParam = params;
-    newParam.type = 'crossEdge';
-    newParam.markerEnd = endMarks;
-    setTaskEdges((eds) => addEdge({ ...newParam, style: { stroke: '#000' } }, eds));
-  }, []);
+  const onTaskNodeConnect = useCallback(
+    (params) => {
+      let newParam = params;
+      newParam.type = 'crossEdge';
+      newParam.markerEnd = endMarks;
+      setTaskEdges((eds) => addEdge({ ...newParam, style: { stroke: '#000' } }, eds));
+    },
+    [setTaskEdges]
+  );
 
   const onTaskNodeDragOver = useCallback((event) => {
     event.preventDefault();
@@ -174,7 +177,7 @@ export default function WorkFlowDesigner() {
       };
       addTaskNode(newTask);
     },
-    [taskFlowInstance]
+    [addTaskNode, taskFlowInstance]
   );
 
   const onTaskNodeClick = (event, node) => {

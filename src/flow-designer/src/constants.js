@@ -272,8 +272,8 @@ export const COMPONENT_MAPPER = {
 };
 
 export const FORM_TEMPLATE = ({ formFields, schema }) => {
-  const { handleSubmit, onReset, onCancel, getState } = useFormApi();
-  const { submitting, valid, pristine } = getState();
+  const { handleSubmit, onCancel } = useFormApi();
+  //const { submitting, valid, pristine } = getState();
   return (
     <form onSubmit={handleSubmit}>
       {formFields.map((formField) => (

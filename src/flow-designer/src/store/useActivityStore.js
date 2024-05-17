@@ -28,7 +28,7 @@ const activityStore = (set, get) => ({
   // Dialog Flow States
   addDialogNodes: (taskNode, dialogNode) => {
     set((state) => {
-      const TaskNodeData = state.activities.taskNodes.map((node) => {
+      const taskNodeData = state.activities.taskNodes.map((node) => {
         if (node.id === taskNode.id) {
           const {
             data: { dialogNodes, ...restdata },
@@ -40,7 +40,7 @@ const activityStore = (set, get) => ({
           return node;
         }
       });
-      return { activities: { taskNodes: TaskNodeData, taskEdges: state.activities.taskEdges } };
+      return { activities: { taskNodes: taskNodeData, taskEdges: state.activities.taskEdges } };
     });
   },
   editDialogNodePros: (activity, taskNode, props, value) => {
