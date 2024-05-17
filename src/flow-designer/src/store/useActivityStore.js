@@ -98,7 +98,10 @@ const activityStore = (set, get) => ({
   },
   reset: () => {
     set({
-      activities: []
+      activities: {
+        taskNodes: TASK_INITIAL_NODES,
+        taskEdges: []
+      }
     });
   }
 });
