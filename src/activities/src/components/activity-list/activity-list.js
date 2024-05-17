@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
 import {
-  ExpandableSearch, Dropdown, Button, Pagination, Tag, DataTable,
-  Table, TableHead, TableRow, TableHeader, TableBody, TableCell,
-  OverflowMenu, OverflowMenuItem,
+  ExpandableSearch,
+  Dropdown,
+  Button,
+  Pagination,
+  Tag,
+  DataTable,
+  Table,
+  TableHead,
+  TableRow,
+  TableHeader,
+  TableBody,
+  TableCell,
+  OverflowMenu,
+  OverflowMenuItem
 } from '@carbon/react';
 import { CheckmarkFilled, NewTab, Add } from '@carbon/icons-react';
-import "./activity-list.scss";
+import './activity-list.scss';
 import { useNavigate } from 'react-router-dom';
+import useActivityStore from '../../../../flow-designer/src/store';
 
 export default function ActivityList() {
+  const reset = useActivityStore((state) => state.reset);
   let navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [filterKey, setFilterKey] = useState('');
@@ -17,22 +30,30 @@ export default function ActivityList() {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
 
   const getStatusIcon = (encrypted) => {
-    return <span><CheckmarkFilled style={{ fill: 'blue' }} /> {encrypted}</span>;
+    return (
+      <span>
+        <CheckmarkFilled style={{ fill: 'blue' }} /> {encrypted}
+      </span>
+    );
   };
 
   const getTag = (status) => {
-    return <Tag className="some-class" type={status === 'Completed' ? "green" : "gray"}>{status}</Tag>;
+    return (
+      <Tag className="some-class" type={status === 'Completed' ? 'green' : 'gray'}>
+        {status}
+      </Tag>
+    );
   };
 
   const getEllipsis = (i) => {
     return (
       <OverflowMenu size="sm" flipped className="always-visible-overflow-menu">
-         <OverflowMenuItem itemText="Edit" onClick={() => navigate(`/edit?id=${encodeURIComponent(i)}`)} />
-        <OverflowMenuItem itemText="Export" onClick={() => navigate(`/export?id=${encodeURIComponent(i)}`)}/>
-        <OverflowMenuItem itemText="Save as" onClick={() => navigate(`/saveas?id=${encodeURIComponent(i)}`)}/>
-        <OverflowMenuItem itemText="Shared/Unshared" onClick={() => navigate(`/shared?id=${encodeURIComponent(i)}`)}/>
+        <OverflowMenuItem itemText="Edit" onClick={() => navigate(`/edit?id=${encodeURIComponent(i)}`)} />
+        <OverflowMenuItem itemText="Export" onClick={() => navigate(`/export?id=${encodeURIComponent(i)}`)} />
+        <OverflowMenuItem itemText="Save as" onClick={() => navigate(`/saveas?id=${encodeURIComponent(i)}`)} />
+        <OverflowMenuItem itemText="Shared/Unshared" onClick={() => navigate(`/shared?id=${encodeURIComponent(i)}`)} />
         <OverflowMenuItem itemText="Deavtivate" onClick={() => navigate(`/deactivate?id=${encodeURIComponent(i)}`)} />
-        <OverflowMenuItem itemText="Delete" onClick={() => navigate(`/delete?id=${encodeURIComponent(i)}`)}/>
+        <OverflowMenuItem itemText="Delete" onClick={() => navigate(`/delete?id=${encodeURIComponent(i)}`)} />
       </OverflowMenu>
     );
   };
@@ -64,22 +85,22 @@ export default function ActivityList() {
     { key: 'migrationstatus', header: 'Migration Status' },
     { key: 'version', header: 'Version' },
     { key: 'actions', header: 'Actions' },
-    { key: 'ellipsis', header: '' },
+    { key: 'ellipsis', header: '' }
   ];
 
   const actionOptions = [
     { id: 'view', label: 'View' },
     { id: 'test', label: 'Test ' },
     { id: 'rollout', label: 'Rollout' },
-    { id: 'mark as final', label: 'Mark as Final' },
+    { id: 'mark as final', label: 'Mark as Final' }
   ];
 
-  const filteredRows = rows.filter(row => {
+  const filteredRows = rows.filter((row) => {
     if (!searchQuery) return true;
     if (filterKey) {
       return row[filterKey].toString().toLowerCase().includes(searchQuery.toLowerCase());
     } else {
-      return Object.keys(row).some(key => row[key].toString().toLowerCase().includes(searchQuery.toLowerCase()));
+      return Object.keys(row).some((key) => row[key].toString().toLowerCase().includes(searchQuery.toLowerCase()));
     }
   });
 
@@ -110,7 +131,7 @@ export default function ActivityList() {
   };
 
   const handleDropdownChange = (rowId, selectedItem) => {
-    const newRows = rows.map(row => {
+    const newRows = rows.map((row) => {
       if (row.id === rowId) {
         return { ...row, actions: selectedItem.label };
       }
@@ -121,21 +142,23 @@ export default function ActivityList() {
 
   return (
     <div className="activities-list-container">
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', marginBottom: "1rem" }}>
-        <ExpandableSearch
-          labelText="Search"
-          placeholder="Search by name"
-          onChange={event => setSearchQuery(event.target.value)}
-          value={searchQuery}
-        />
-        <Button style={{ marginLeft: "8px" }} renderIcon={NewTab} onClick={() => navigate('new-activity')}>
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+        <ExpandableSearch labelText="Search" placeholder="Search by name" onChange={(event) => setSearchQuery(event.target.value)} value={searchQuery} />
+        <Button
+          style={{ marginLeft: '8px' }}
+          renderIcon={NewTab}
+          onClick={() => {
+            reset();
+            navigate('new-activity');
+          }}
+        >
           New
         </Button>
-        <Button kind="tertiary" style={{ marginLeft: "8px" }} renderIcon={Add}>
+        <Button kind="tertiary" style={{ marginLeft: '8px' }} renderIcon={Add}>
           Import
         </Button>
         <Dropdown
-          style={{ marginLeft: "8px" }}
+          style={{ marginLeft: '8px' }}
           id={`action-dropdown-search`}
           items={[
             { id: 'name', label: 'Name' },
@@ -153,7 +176,7 @@ export default function ActivityList() {
           <Table {...getTableProps()}>
             <TableHead>
               <TableRow>
-                {headers.map(header => (
+                {headers.map((header) => (
                   <TableHeader
                     {...getHeaderProps({
                       header,
@@ -167,26 +190,26 @@ export default function ActivityList() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map(row => (
+              {rows.map((row) => (
                 <TableRow {...getRowProps({ row })}>
-                  {row.cells.map(cell => (
+                  {row.cells.map((cell) => (
                     <TableCell key={cell.id}>
-                      {cell.info.header === 'status' || cell.info.header === 'migrationstatus' ? getTag(cell.value) : cell.info.header === 'actions' ? (
+                      {cell.info.header === 'status' || cell.info.header === 'migrationstatus' ? (
+                        getTag(cell.value)
+                      ) : cell.info.header === 'actions' ? (
                         <Dropdown
                           id={`action-dropdown-${cell.id}`}
                           items={actionOptions}
                           label="Choose an action"
-                          selectedItem={actionOptions.find(option => option.label === cell.value)}
+                          selectedItem={actionOptions.find((option) => option.label === cell.value)}
                           itemToString={(item) => (item ? item.label : '')}
                           onChange={({ selectedItem }) => handleDropdownChange(row.id, selectedItem)}
                         />
-
                       ) : (
                         cell.value
                       )}
                     </TableCell>
                   ))}
-
                 </TableRow>
               ))}
             </TableBody>
