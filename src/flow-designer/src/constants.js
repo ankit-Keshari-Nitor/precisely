@@ -139,9 +139,7 @@ export const NODE_TYPES = [
     type: NODE_TYPE.DIALOG,
     borderColor: '#0585FC',
     taskName: 'Dialog Task',
-    editableProps: {
-      name: 'Form'
-    },
+    editableProps: {},
     contextMenu: [
       { label: 'Delete', action: 'delete' },
       { label: 'Clone', action: 'clone' },
@@ -154,9 +152,7 @@ export const NODE_TYPES = [
     type: NODE_TYPE.API,
     borderColor: '#0585FC',
     taskName: 'API Task',
-    editableProps: {
-      name: 'API'
-    },
+    editableProps: {},
     contextMenu: [
       { label: 'Delete', action: 'delete' },
       { label: 'Clone', action: 'clone' },
@@ -169,9 +165,7 @@ export const NODE_TYPES = [
     type: NODE_TYPE.XSLT,
     borderColor: '#0585FC',
     taskName: 'XSLT Task',
-    editableProps: {
-      name: 'XSLT'
-    },
+    editableProps: {},
     contextMenu: [
       { label: 'Delete', action: 'delete' },
       { label: 'Clone', action: 'clone' },
