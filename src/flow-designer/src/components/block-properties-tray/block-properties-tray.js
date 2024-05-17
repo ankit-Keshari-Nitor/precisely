@@ -15,7 +15,7 @@ import {
 import { CrossIcon, ExpandIcon } from './../../icons';
 import { Modal } from '@carbon/react';
 
-export default function BlockPropertiesTray({ selectedNode, setOpenPropertiesBlock }) {
+export default function BlockPropertiesTray({ selectedNode, selectedTaskNode, setOpenPropertiesBlock }) {
   const [openExpandMode, setOpenExpandMode] = useState(false);
 
   const getForm = (selectedNode) => {
@@ -35,7 +35,7 @@ export default function BlockPropertiesTray({ selectedNode, setOpenPropertiesBlo
       case NODE_TYPE.GATEWAY:
         return null;
       case NODE_TYPE.DIALOG:
-        return <DialogTaskDefinitionForm selectedNode={selectedNode} />;
+        return <DialogTaskDefinitionForm selectedNode={selectedNode} selectedTaskNode={selectedTaskNode} />;
       case NODE_TYPE.XSLT:
         return <XsltTaskDefinitionForm selectedNode={selectedNode} />;
       case NODE_TYPE.API:
