@@ -12,6 +12,11 @@ const activityStore = (set, get) => ({
       activities: { taskNodes: state.activities.taskNodes.concat(activity), taskEdges: state.activities.taskEdges }
     }));
   },
+  addTaskEdges: (activity) => {
+    set((state) => ({
+      activities: { taskNodes: state.activities.taskNodes, taskEdges: state.activities.taskEdges.concat(activity) }
+    }));
+  },
   editTaskNodePros: (activity, props, value) => {
     set((state) => {
       const copyNodes = state.activities.taskNodes;
@@ -36,6 +41,25 @@ const activityStore = (set, get) => ({
           } = node;
           const newDilogNode = [...dialogNodes, dialogNode];
           return { ...rest, data: { ...restdata, dialogNodes: newDilogNode } };
+        } else {
+          return node;
+        }
+      });
+      return { activities: { taskNodes: taskNodeData, taskEdges: state.activities.taskEdges } };
+    });
+  },
+
+  addDialogEdges: (taskNode, dialogEdge) => {
+    set((state) => {
+      console.log('taskNode', taskNode);
+      const taskNodeData = state.activities.taskNodes.map((node) => {
+        if (node.id === taskNode.id) {
+          const {
+            data: { dialogEdges, ...restdata },
+            ...rest
+          } = node;
+          const newDilogEdge = [...dialogEdges, dialogEdge];
+          return { ...rest, data: { ...restdata, dialogEdges: newDilogEdge } };
         } else {
           return node;
         }

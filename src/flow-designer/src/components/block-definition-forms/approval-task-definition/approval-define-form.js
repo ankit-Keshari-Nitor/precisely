@@ -119,14 +119,15 @@ export const SCHEMA = {
   ]
 };
 
-const ApprovalDefineForm = ({ id, setOpenCancelDialog, onSubmitDefinitionForm }) => (
+const ApprovalDefineForm = ({ id, selectedNode, setOpenCancelDialog, onSubmitDefinitionForm }) => (
   <FormRenderer
     id={id}
+    initialValues={selectedNode?.data?.editableProps}
     FormTemplate={FORM_TEMPLATE}
     componentMapper={COMPONENT_MAPPER}
     schema={SCHEMA}
     onSubmit={onSubmitDefinitionForm}
-    onCancel={() => console.log('Cancelling')}
+    onCancel={setOpenCancelDialog}
     onReset={() => console.log('Resetting')}
   />
 );

@@ -39,7 +39,7 @@ export default function BlockPropertiesTray({ selectedNode, selectedTaskNode, se
       case NODE_TYPE.XSLT:
         return <XsltTaskDefinitionForm selectedNode={selectedNode} selectedTaskNode={selectedTaskNode} />;
       case NODE_TYPE.API:
-        return <ApiTaskDefinitionForm selectedNode={selectedNode} />;
+        return <ApiTaskDefinitionForm selectedNode={selectedNode} selectedTaskNode={selectedTaskNode} />;
       default:
         return null;
     }

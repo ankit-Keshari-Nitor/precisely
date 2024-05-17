@@ -35,6 +35,8 @@ export default function WorkFlowDesigner() {
   const storeData = useActivityStore((state) => state.activities);
   const addTaskNode = useActivityStore((state) => state.addTaskNodes);
   const addDialogNodes = useActivityStore((state) => state.addDialogNodes);
+  const addTaskEdges = useActivityStore((state) => state.addTaskEdges);
+  const addDialogEdges = useActivityStore((state) => state.addDialogEdges);
   const [isDialogFlowActive, setIsDialogFlowActive] = useState(false);
   const [isPageDesignerActive, setIsPageDesignerActive] = useState(false);
 
@@ -66,9 +68,9 @@ export default function WorkFlowDesigner() {
       let newParam = params;
       newParam.type = 'crossEdge';
       newParam.markerEnd = endMarks;
-      setDialogEdges((eds) => addEdge({ ...newParam, style: { stroke: '#000' } }, eds));
+      addDialogEdges(selectedTaskNode, { ...newParam, style: { stroke: '#000' } });
     },
-    [setDialogEdges]
+    [addDialogEdges, selectedTaskNode]
   );
 
   const onDialogNodeDragOver = useCallback((event) => {
@@ -77,10 +79,13 @@ export default function WorkFlowDesigner() {
   }, []);
 
   useEffect(() => {
+    console.log('storeData>>>>', storeData);
     setTaskNodes(storeData.taskNodes);
+    setTaskEdges(storeData.taskEdges);
     if (selectedTaskNode) {
       const dialogNodeData = storeData.taskNodes.filter((node) => node.id === selectedTaskNode.id)[0];
       setDialogNodes(dialogNodeData?.data?.dialogNodes);
+      setDialogEdges(dialogNodeData?.data?.dialogEdges);
     }
   }, [setTaskNodes, storeData]);
 
@@ -142,9 +147,9 @@ export default function WorkFlowDesigner() {
       let newParam = params;
       newParam.type = 'crossEdge';
       newParam.markerEnd = endMarks;
-      setTaskEdges((eds) => addEdge({ ...newParam, style: { stroke: '#000' } }, eds));
+      addTaskEdges({ ...newParam, style: { stroke: '#000' } });
     },
-    [setTaskEdges]
+    [addTaskEdges]
   );
 
   const onTaskNodeDragOver = useCallback((event) => {
@@ -173,7 +178,7 @@ export default function WorkFlowDesigner() {
         id: getNewTaskId(),
         position,
         type: nodeData.type,
-        data: { ...nodeData, onDoubleClick: onTaskNodeDoubleClick, dialogNodes: DIALOG_INITIAL_NODES }
+        data: { ...nodeData, onDoubleClick: onTaskNodeDoubleClick, dialogNodes: DIALOG_INITIAL_NODES, dialogEdges: [] }
       };
       addTaskNode(newTask);
     },
